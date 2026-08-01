@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Professional CV Builder - Developed by Altra Solve</title>
+  <title>Free Online CV Builder & Resume Maker | Altra Solve</title>
+  <meta name="title" content="Free Online CV Builder & Resume Maker | Altra Solve" />
+  <meta name="description" content="Create a professional, ATS-friendly resume or CV in minutes for free. Easy-to-use templates, instant PDF download, and no credit card required." />
+  <meta name="keywords" content="free cv builder, online resume maker, ats friendly cv maker, professional resume generator, altra solve cv builder" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Altra Solve" />
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,236 +23,230 @@
     body { 
       font-family: 'Inter', sans-serif; 
       background-color: #0f172a; 
-      color: #f8fafc; /* FIXED: High contrast white/slate text on dark background */
+      color: #f8fafc;
     }
 
-    /* Standard A4 CV Container Sizing */
+    /* Standard A4 CV Container Sizing & Scaling for Mobile responsiveness */
+    .a4-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
     .a4-page {
       width: 210mm;
       min-height: 297mm;
-      padding: 16mm 16mm 16mm 16mm;
+      padding: 16mm;
       margin: 0 auto;
       background: #ffffff;
-      color: #1e293b; /* Explicit dark text inside print page */
+      color: #1e293b;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
       position: relative;
+      flex-shrink: 0;
     }
 
-    /* Print Break Rules */
+    /* Mobile scaling for A4 preview */
+    @media (max-width: 768px) {
+      .a4-page {
+        transform: scale(0.42);
+        transform-origin: top center;
+        margin-bottom: -160mm;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .a4-page {
+        transform: scale(0.75);
+        transform-origin: top center;
+        margin-bottom: -70mm;
+      }
+    }
+
     @media print {
       body { background: none; }
-      .a4-page { box-shadow: none; margin: 0; width: 100%; height: auto; }
+      .a4-page { box-shadow: none; margin: 0; width: 100%; height: auto; transform: none !important; }
+      .no-print { display: none !important; }
     }
 
     /* -------------------------------------------------------------
-       THEME 1: MODERN CORPORATE
+       THEMES STYLES
        ------------------------------------------------------------- */
+    /* Theme 1 */
     .cv-theme-1 { border-top: 8px solid #1e40af; }
     .cv-theme-1 .section-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #1e40af;
-      border-bottom: 2px solid #e2e8f0;
-      padding-bottom: 4px;
-      margin-bottom: 10px;
+      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #1e40af; border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 4px; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 2: EXECUTIVE MINIMALIST (ATS Optimized)
-       ------------------------------------------------------------- */
+    /* Theme 2 */
     .cv-theme-2 { font-family: 'Inter', sans-serif; color: #0f172a; }
     .cv-theme-2 .section-title {
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #1e293b;
-      background-color: #f1f5f9;
-      padding: 4px 8px;
-      border-left: 4px solid #0f172a;
-      margin-bottom: 10px;
+      font-size: 0.8rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.1em; color: #1e293b; background-color: #f1f5f9;
+      padding: 4px 8px; border-left: 4px solid #0f172a; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 3: CREATIVE / TECH SIDEBAR
-       ------------------------------------------------------------- */
+    /* Theme 3 Sidebar */
     .cv-theme-3 { padding: 0 !important; display: flex; min-height: 297mm; }
-    .cv-theme-3 .sidebar { width: 32%; background: #0f172a; color: #ffffff; padding: 16mm 10mm; }
-    .cv-theme-3 .main-content { width: 68%; padding: 16mm 12mm; color: #1e293b; }
+    .cv-theme-3 .sidebar { width: 32%; background: #0f172a; color: #ffffff; padding: 14mm 8mm; }
+    .cv-theme-3 .main-content { width: 68%; padding: 14mm 10mm; color: #1e293b; }
     .cv-theme-3 .sidebar .section-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #38bdf8;
-      border-bottom: 1px solid #334155;
-      padding-bottom: 4px;
-      margin-bottom: 8px;
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #38bdf8; border-bottom: 1px solid #334155;
+      padding-bottom: 4px; margin-bottom: 8px;
     }
     .cv-theme-3 .main-content .section-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #0f172a;
-      border-bottom: 2px solid #0f172a;
-      padding-bottom: 4px;
-      margin-bottom: 10px;
+      font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #0f172a; border-bottom: 2px solid #0f172a;
+      padding-bottom: 4px; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 4: CLASSIC TRADITIONAL (Serif / Enterprise)
-       ------------------------------------------------------------- */
+    /* Theme 4 Traditional Serif */
     .cv-theme-4 { font-family: 'Merriweather', serif; color: #1c1917; }
     .cv-theme-4 h1, .cv-theme-4 h2, .cv-theme-4 h3 { font-family: 'Merriweather', serif; }
     .cv-theme-4 .section-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #27272a;
-      border-bottom: 1px solid #71717a;
-      padding-bottom: 2px;
-      margin-bottom: 10px;
-      text-align: center;
+      font-size: 0.88rem; font-weight: 700; text-transform: uppercase;
+      color: #27272a; border-bottom: 1px solid #71717a; padding-bottom: 2px;
+      margin-bottom: 10px; text-align: center;
     }
 
-    /* -------------------------------------------------------------
-       THEME 5: ELEGANT TEAL GRID
-       ------------------------------------------------------------- */
+    /* Theme 5 Teal */
     .cv-theme-5 { border-left: 10px solid #0d9488; }
     .cv-theme-5 .section-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #0d9488;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border-bottom: 1.5px solid #ccfbf1;
-      padding-bottom: 4px;
-      margin-bottom: 10px;
+      font-size: 0.82rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #0d9488; border-bottom: 1.5px solid #ccfbf1; 
+      padding-bottom: 4px; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 6: COMPACT SLATE MODERN
-       ------------------------------------------------------------- */
+    /* Theme 6 Slate Modern Header */
     .cv-theme-6 .header-bg { background: #334155; color: #ffffff; padding: 16px; border-radius: 8px; }
     .cv-theme-6 .section-title {
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #334155;
-      border-bottom: 2px stroke #cbd5e1;
-      border-bottom: 2px dashed #94a3b8;
-      padding-bottom: 4px;
-      margin-bottom: 10px;
+      font-size: 0.82rem; font-weight: 800; text-transform: uppercase;
+      color: #334155; border-bottom: 2px dashed #94a3b8; padding-bottom: 4px; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 7: EXECUTIVE VISUAL BANNER
-       ------------------------------------------------------------- */
-    .cv-theme-7 .banner { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: #ffffff; margin: -16mm -16mm 12mm -16mm; padding: 14mm 16mm; }
+    /* Theme 7 Visual Banner */
+    .cv-theme-7 .banner { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: #ffffff; margin: -16mm -16mm 12mm -16mm; padding: 12mm 16mm; }
     .cv-theme-7 .section-title {
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #4338ca;
-      border-left: 4px solid #4338ca;
-      padding-left: 8px;
-      margin-bottom: 10px;
+      font-size: 0.82rem; font-weight: 800; text-transform: uppercase;
+      color: #4338ca; border-left: 4px solid #4338ca; padding-left: 8px; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 8: VIBRANT EMERALD ACCENT
-       ------------------------------------------------------------- */
+    /* Theme 8 Emerald Accent */
     .cv-theme-8 { border-top: 8px solid #059669; }
     .cv-theme-8 .section-title {
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #059669;
-      border-bottom: 2px solid #a7f3d0;
-      padding-bottom: 4px;
-      margin-bottom: 10px;
+      font-size: 0.82rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #059669; border-bottom: 2px solid #a7f3d0;
+      padding-bottom: 4px; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 9: NORDIC MONOCHROMATIC
-       ------------------------------------------------------------- */
+    /* Theme 9 Nordic Clean */
     .cv-theme-9 { font-family: 'Plus Jakarta Sans', sans-serif; color: #09090b; }
     .cv-theme-9 .section-title {
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #09090b;
-      border-bottom: 1.5px solid #09090b;
-      padding-bottom: 3px;
-      margin-bottom: 10px;
+      font-size: 0.8rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #09090b; border-bottom: 1.5px solid #09090b;
+      padding-bottom: 3px; margin-bottom: 10px;
     }
 
-    /* -------------------------------------------------------------
-       THEME 10: WARM AMBER & CORAL EXECUTIVE
-       ------------------------------------------------------------- */
+    /* Theme 10 Amber Accent */
     .cv-theme-10 { border-left: 10px solid #ea580c; }
     .cv-theme-10 .section-title {
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #ea580c;
-      border-bottom: 2px solid #ffedd5;
-      padding-bottom: 4px;
-      margin-bottom: 10px;
+      font-size: 0.82rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #ea580c; border-bottom: 2px solid #ffedd5;
+      padding-bottom: 4px; margin-bottom: 10px;
     }
 
-    /* Custom Form & Accordion Enhancements */
     details summary::-webkit-details-marker { display:none; }
     details summary { list-style: none; }
     .input-field {
-      width: 100%;
-      padding: 0.5rem 0.75rem;
-      font-size: 0.8125rem;
-      border: 1px solid #cbd5e1;
-      border-radius: 0.375rem;
-      background-color: #f8fafc;
-      color: #0f172a; /* FIXED: Crisp dark text in form inputs */
-      transition: all 0.15s ease-in-out;
+      width: 100%; padding: 0.5rem 0.75rem; font-size: 0.8125rem;
+      border: 1px solid #cbd5e1; border-radius: 0.375rem;
+      background-color: #f8fafc; color: #0f172a; transition: all 0.15s ease-in-out;
     }
     .input-field:focus {
-      background-color: #ffffff;
-      border-color: #2563eb;
+      background-color: #ffffff; border-color: #2563eb;
       outline: 2px solid rgba(37, 99, 235, 0.2);
     }
   </style>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Professional CV Builder",
+    "url": "https://cvstudio.altrasolve.com",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Altra Solve"
+    }
+  }
+  </script>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-900 text-slate-100">
 
-  <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50 shadow-lg">
+  <!-- ================= ADVERTISEMENT BANNER SECTION ================= -->
+  <section class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 border-b border-indigo-900/50 py-6 px-4 no-print">
+    <div class="max-w-[1400px] mx-auto flex flex-col items-center text-center space-y-4">
+      <a href="https://altrasolve.com" target="_blank" rel="noopener noreferrer" class="inline-block transition transform hover:scale-105">
+        <img src="logo.png" alt="Altra Solve Logo" class="h-12 md:h-16 object-contain" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+        <div id="logo-fallback" class="hidden text-2xl font-black text-blue-500 tracking-wider">ALTRA SOLVE</div>
+      </a>
+      <span class="inline-block bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-widest">
+        CUSTOM SOFTWARE DEVELOPMENT
+      </span>
+      <h2 class="text-xl md:text-3xl font-extrabold text-white max-w-3xl leading-tight">
+        We Understand Your Business. We Build Software That Grows It.
+      </h2>
+      <p class="text-xs md:text-sm text-slate-300 max-w-2xl leading-relaxed">
+        From idea to scalable product — <a href="https://altrasolve.com" target="_blank" class="text-blue-400 font-bold hover:underline">Altra Solve</a> turns your unique workflow into powerful digital solutions.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 pt-2">
+        <a href="https://altrasolve.com" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-lg shadow-blue-600/30 flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i> Book Free Consultation
+        </a>
+        <a href="https://altrasolve.com" target="_blank" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs md:text-sm font-bold px-5 py-2.5 rounded-lg transition flex items-center gap-2">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i> View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-emerald-600 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
+    <i data-lucide="check-circle" class="w-5 h-5"></i>
+    <span id="toast-message">CV Downloading Started...</span>
+  </div>
+
+  <!-- Header Section -->
+  <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40 shadow-lg no-print">
     <div class="max-w-[1700px] mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-3 pt-1">
         <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 p-2 rounded-xl shadow-md">
           <i data-lucide="file-badge-2" class="w-6 h-6 text-white"></i>
         </div>
         <div>
-          <h1 class="font-extrabold text-lg text-white leading-tight tracking-wide flex items-center gap-2">
+          <h1 class="font-extrabold text-base md:text-lg text-white leading-tight tracking-wide flex items-center gap-2">
             ProCV Studio <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full border border-blue-500/30 font-medium">10-Theme Suite</span>
           </h1>
           <p class="text-[11px] text-slate-400">Professional CV Engine & Dynamic PDF Generator</p>
         </div>
       </div>
       
-      <!-- Export PDF Action & Developer Tag -->
-      <div class="flex items-center gap-4">
-        <div class="hidden sm:flex text-xs bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-full items-center gap-1.5 text-slate-300">
+      <div class="flex items-center gap-3">
+        <a href="https://altrasolve.com" target="_blank" class="hidden sm:flex text-xs bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-full items-center gap-1.5 text-slate-300 hover:border-blue-500/50 transition">
           <span>Developed by</span>
           <span class="font-bold text-blue-400">Altra Solve</span>
-        </div>
+        </a>
         <button onclick="downloadPDF()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-lg transition transform active:scale-95">
           <i data-lucide="download-cloud" class="w-4 h-4"></i> Export High-Res PDF
         </button>
@@ -259,7 +258,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       
       <!-- LEFT COLUMN: CONTROLS & DYNAMIC INPUT FORM -->
-      <div class="lg:col-span-5 bg-slate-950 p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4 max-h-[88vh] overflow-y-auto">
+      <div class="lg:col-span-5 bg-slate-950 p-4 md:p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4 max-h-[88vh] overflow-y-auto no-print">
         
         <!-- Theme Selection Header -->
         <div class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 space-y-2">
@@ -267,31 +266,28 @@
             <i data-lucide="palette" class="w-4 h-4 text-blue-400"></i> Select Resume Theme (10 Enterprise Templates)
           </label>
           <select id="cv-theme-select" onchange="renderCV()" class="w-full p-2.5 text-xs font-semibold border border-slate-700 rounded-lg bg-slate-950 text-slate-100 focus:ring-2 focus:ring-blue-500">
-            <option value="theme-1">1. Modern Corporate (Blue Accent - Universal Executive)</option>
-            <option value="theme-2">2. Executive Minimalist (High ATS Parsing Score)</option>
+            <option value="theme-1">1. Modern Corporate (Blue Accent)</option>
+            <option value="theme-2">2. Executive Minimalist (ATS Friendly)</option>
             <option value="theme-3">3. Tech & Creative Sidebar (2-Column Dark Sidebar)</option>
             <option value="theme-4">4. Classic Traditional (Serif / Finance & Legal)</option>
             <option value="theme-5">5. Elegant Teal Grid (Engineering & Operations)</option>
-            <option value="theme-6">6. Compact Slate Modern (Nordic Header)</option>
-            <option value="theme-7">7. Executive Visual Banner (Modern Photo Header)</option>
-            <option value="theme-8">8. Vibrant Emerald Accent (Tech & Modern Startups)</option>
-            <option value="theme-9">9. Nordic Monochromatic (Minimalist Ultra-Clean)</option>
-            <option value="theme-10">10. Warm Amber & Coral (Marketing & Executive)</option>
+            <option value="theme-6">6. Compact Slate Modern (Header Card)</option>
+            <option value="theme-7">7. Executive Visual Banner (Modern Dark Header)</option>
+            <option value="theme-8">8. Vibrant Emerald Accent (Tech Startups)</option>
+            <option value="theme-9">9. Nordic Monochromatic (Ultra-Clean)</option>
+            <option value="theme-10">10. Warm Amber Accent (Marketing & Executive)</option>
           </select>
         </div>
 
         <!-- ACCORDIONS FOR DATA INPUT -->
         <div class="space-y-3">
-          
           <details open class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
             <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
               <span class="flex items-center gap-2 text-blue-400"><i data-lucide="user" class="w-4 h-4"></i> Personal Details & Passport Photo</span>
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
             </summary>
-            <!-- FIXED: Added text-slate-200 to container so labels are crisp and readable -->
             <div class="p-4 space-y-3 bg-slate-950 text-slate-200">
               
-              <!-- Passport Photo Upload Section -->
               <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
                 <label class="block text-[11px] font-bold text-slate-300">Passport Size Profile Photo</label>
                 <div class="flex items-center gap-3">
@@ -370,9 +366,7 @@
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
             </summary>
             <div class="p-4 space-y-3 bg-slate-950">
-              <div id="experience-container" class="space-y-3">
-                <!-- Dynamic Experience Cards Injected Here -->
-              </div>
+              <div id="experience-container" class="space-y-3"></div>
               <button type="button" onclick="addExperience()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Another Work Experience
               </button>
@@ -385,9 +379,7 @@
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
             </summary>
             <div class="p-4 space-y-3 bg-slate-950">
-              <div id="education-container" class="space-y-3">
-                <!-- Dynamic Education Cards Injected Here -->
-              </div>
+              <div id="education-container" class="space-y-3"></div>
               <button type="button" onclick="addEducation()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Academic Qualification
               </button>
@@ -400,9 +392,7 @@
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
             </summary>
             <div class="p-4 space-y-3 bg-slate-950">
-              <div id="training-container" class="space-y-3">
-                <!-- Dynamic Training Cards Injected Here -->
-              </div>
+              <div id="training-container" class="space-y-3"></div>
               <button type="button" onclick="addTraining()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Training / Certification
               </button>
@@ -432,47 +422,44 @@
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
             </summary>
             <div class="p-4 space-y-3 bg-slate-950">
-              <div id="reference-container" class="space-y-3">
-                <!-- Dynamic Reference Cards Injected Here -->
-              </div>
+              <div id="reference-container" class="space-y-3"></div>
               <button type="button" onclick="addReference()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Reference
               </button>
             </div>
           </details>
-
         </div>
 
       </div>
 
       <!-- RIGHT COLUMN: LIVE A4 PREVIEW -->
-      <div class="lg:col-span-7 bg-slate-950 p-4 md:p-6 rounded-2xl border border-slate-800 overflow-x-auto flex flex-col items-center justify-start min-h-[88vh]">
+      <div class="lg:col-span-7 bg-slate-950 p-3 md:p-6 rounded-2xl border border-slate-800 overflow-hidden flex flex-col items-center justify-start min-h-[88vh]">
         <div class="w-full flex items-center justify-between mb-4 px-2">
           <div class="text-xs text-slate-300 font-semibold flex items-center gap-2">
             <i data-lucide="eye" class="w-4 h-4 text-blue-400"></i> Live A4 Print Canvas
           </div>
-          <span class="text-[11px] text-slate-500">210mm x 297mm (Standard A4 Resolution)</span>
+          <span class="text-[11px] text-slate-500">210mm x 297mm</span>
         </div>
 
-        <!-- Render Target -->
-        <div id="cv-render-area" class="w-full flex justify-center">
-          <!-- Dynamic Content Rendered Here -->
+        <div class="a4-wrapper">
+          <div id="cv-render-area" class="w-full flex justify-center">
+            <!-- Dynamic Content Rendered Here -->
+          </div>
         </div>
       </div>
 
     </div>
   </main>
 
-  <footer class="bg-slate-950 border-t border-slate-800 py-4 mt-auto">
+  <footer class="bg-slate-950 border-t border-slate-800 py-4 mt-auto no-print">
     <div class="max-w-[1700px] mx-auto px-4 text-center text-xs text-slate-400">
-      &copy; 2026 Enterprise Professional Resume Suite. Developed by <span class="font-bold text-blue-400">Altra Solve</span>.
+      &copy; 2026 Enterprise Professional Resume Suite. Developed by <a href="https://altrasolve.com" target="_blank" class="font-bold text-blue-400 hover:underline">Altra Solve</a>.
     </div>
   </footer>
 
   <script>
     let userPhotoData = null;
 
-    // Helper to format bullet points into cleanly aligned HTML lists across themes
     function formatBulletPoints(text) {
       if (!text) return '';
       const lines = text.split('\n');
@@ -528,7 +515,6 @@
       updateExperience(index, 'desc', textarea.value);
     }
 
-    // Default Dynamic Datasets
     let experiences = [
       {
         role: "Chief Operating Officer & Director",
@@ -591,9 +577,6 @@
       }
     ];
 
-    /* =========================================================
-       PHOTO UPLOAD HANDLER
-       ========================================================= */
     function handlePhotoUpload(event) {
       const file = event.target.files[0];
       if (file) {
@@ -607,9 +590,6 @@
       }
     }
 
-    /* =========================================================
-       DYNAMIC FORM MANAGERS (WORK EXPERIENCE)
-       ========================================================= */
     function renderExperienceForm() {
       const container = document.getElementById('experience-container');
       container.innerHTML = experiences.map((exp, index) => `
@@ -656,9 +636,6 @@
       renderCV();
     }
 
-    /* =========================================================
-       DYNAMIC FORM MANAGERS (EDUCATION)
-       ========================================================= */
     function renderEducationForm() {
       const container = document.getElementById('education-container');
       container.innerHTML = educations.map((edu, index) => `
@@ -673,8 +650,8 @@
           <input type="text" value="${edu.degree}" oninput="updateEducation(${index}, 'degree', this.value)" placeholder="Degree Name" class="input-field">
           <input type="text" value="${edu.inst}" oninput="updateEducation(${index}, 'inst', this.value)" placeholder="Institution" class="input-field">
           <div class="grid grid-cols-2 gap-2">
-            <input type="text" value="${edu.year}" oninput="updateEducation(${index}, 'year', this.value)" placeholder="Year / Duration (e.g. 2010 - 2014)" class="input-field">
-            <input type="text" value="${edu.cgpa || ''}" oninput="updateEducation(${index}, 'cgpa', this.value)" placeholder="CGPA / Result (e.g. 3.85/4.00)" class="input-field">
+            <input type="text" value="${edu.year}" oninput="updateEducation(${index}, 'year', this.value)" placeholder="Year / Duration" class="input-field">
+            <input type="text" value="${edu.cgpa || ''}" oninput="updateEducation(${index}, 'cgpa', this.value)" placeholder="CGPA / Result" class="input-field">
           </div>
         </div>
       `).join('');
@@ -698,9 +675,6 @@
       renderCV();
     }
 
-    /* =========================================================
-       DYNAMIC FORM MANAGERS (TRAINING & CERTIFICATIONS)
-       ========================================================= */
     function renderTrainingForm() {
       const container = document.getElementById('training-container');
       container.innerHTML = trainings.map((t, index) => `
@@ -739,9 +713,6 @@
       renderCV();
     }
 
-    /* =========================================================
-       DYNAMIC FORM MANAGERS (REFERENCES)
-       ========================================================= */
     function renderReferenceForm() {
       const container = document.getElementById('reference-container');
       container.innerHTML = references.map((ref, index) => `
@@ -783,10 +754,7 @@
       renderCV();
     }
 
-
-    /* =========================================================
-       MAIN CV RENDERER ENGINE (10 THEMES)
-       ========================================================= */
+    /* MAIN RENDER FUNCTION SUPPORTING ALL 10 THEMES DYNAMICALLY */
     function renderCV() {
       const theme = document.getElementById('cv-theme-select').value;
       const showPhoto = document.getElementById('cv-show-photo').checked;
@@ -810,21 +778,142 @@
 
       const container = document.getElementById('cv-render-area');
 
-      // -------------------------------------------------------------
-      // THEME 1: MODERN CORPORATE
-      // -------------------------------------------------------------
-      if (theme === 'theme-1') {
+      // Common Sections Blocks
+      const expBlock = `
+        <div class="mb-4">
+          <h2 class="section-title">Work Experience</h2>
+          <div class="space-y-3">
+            ${experiences.map(exp => `
+              <div>
+                <div class="flex justify-between items-baseline">
+                  <h3 class="font-bold text-slate-800 text-xs">${exp.role} <span class="font-semibold text-blue-700">| ${exp.company}</span></h3>
+                  <span class="text-[10px] font-bold text-slate-500">${exp.date}</span>
+                </div>
+                <div class="text-[11px] text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+
+      const eduBlock = `
+        <div class="mb-4">
+          <h2 class="section-title">Academic Qualifications</h2>
+          <div class="space-y-2">
+            ${educations.map(edu => `
+              <div class="flex justify-between items-baseline">
+                <div>
+                  <h3 class="font-bold text-slate-800 text-xs">${edu.degree} ${edu.cgpa ? `<span class="font-normal text-slate-600">(CGPA: ${edu.cgpa})</span>` : ''}</h3>
+                  <p class="text-[11px] text-slate-500">${edu.inst}</p>
+                </div>
+                <span class="text-[10px] font-semibold text-slate-500">${edu.year}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+
+      const trainBlock = trainings.length ? `
+        <div class="mb-4">
+          <h2 class="section-title">Trainings & Certifications</h2>
+          <div class="space-y-2">
+            ${trainings.map(t => `
+              <div class="flex justify-between items-baseline">
+                <div>
+                  <h3 class="font-bold text-slate-800 text-xs">${t.title} <span class="font-normal text-slate-500">— ${t.inst}</span></h3>
+                  <p class="text-[10px] text-slate-600">${t.details}</p>
+                </div>
+                <span class="text-[10px] font-semibold">${t.year}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>` : '';
+
+      const refBlock = references.length ? `
+        <div>
+          <h2 class="section-title">References</h2>
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            ${references.map(r => `
+              <div>
+                <p class="font-bold text-slate-800">${r.name}</p>
+                <p class="text-[11px] text-slate-600">${r.title}, ${r.company}</p>
+                <p class="text-[10px] text-slate-500">${r.email} | ${r.phone}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>` : '';
+
+      // Rendering Layouts according to Theme selection
+      if (theme === 'theme-3') {
+        // 2-Column Sidebar Layout
         container.innerHTML = `
-          <div class="a4-page cv-theme-1">
+          <div class="a4-page cv-theme-3">
+            <div class="sidebar">
+              ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-28 h-32 object-cover rounded mb-4 mx-auto border-2 border-slate-700">` : ''}
+              <h1 class="text-lg font-bold text-white mb-1">${data.name}</h1>
+              <p class="text-xs text-sky-400 mb-4">${data.title}</p>
+              
+              <div class="space-y-3 text-[11px] text-slate-300">
+                <p>📧 ${data.email}</p>
+                <p>📞 ${data.phone}</p>
+                <p>📍 ${data.location}</p>
+                <p>🔗 ${data.linkedin}</p>
+              </div>
+
+              <div class="mt-6">
+                <h2 class="section-title">Core Skills</h2>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  ${data.skills.map(s => `<span class="bg-slate-800 text-sky-300 text-[10px] px-2 py-0.5 rounded border border-slate-700">${s}</span>`).join('')}
+                </div>
+              </div>
+
+              ${data.languages ? `
+              <div class="mt-6">
+                <h2 class="section-title">Languages</h2>
+                <p class="text-[11px] text-slate-300 mt-1">${data.languages}</p>
+              </div>` : ''}
+            </div>
+
+            <div class="main-content">
+              ${data.summary ? `<div class="mb-4"><h2 class="section-title">Executive Summary</h2><div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div></div>` : ''}
+              ${expBlock}
+              ${eduBlock}
+              ${trainBlock}
+              ${refBlock}
+            </div>
+          </div>`;
+      }
+      else if (theme === 'theme-7') {
+        // Dark Banner Layout
+        container.innerHTML = `
+          <div class="a4-page cv-theme-7">
+            <div class="banner flex justify-between items-center">
+              <div>
+                <h1 class="text-2xl font-bold">${data.name}</h1>
+                <p class="text-indigo-200 text-xs mt-1 font-medium">${data.title}</p>
+                <div class="flex flex-wrap gap-3 text-[11px] text-indigo-100 mt-3">
+                  <span>📧 ${data.email}</span> <span>📞 ${data.phone}</span> <span>📍 ${data.location}</span>
+                </div>
+              </div>
+              ${photoHtml}
+            </div>
+            ${data.summary ? `<div class="mb-4"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div></div>` : ''}
+            ${expBlock}
+            ${eduBlock}
+            <div class="mb-4"><h2 class="section-title">Skills</h2><p class="text-xs text-slate-700">${data.skills.join(' • ')}</p></div>
+            ${trainBlock}
+            ${refBlock}
+          </div>`;
+      }
+      else {
+        // Single Column Layout for Themes 1, 2, 4, 5, 6, 8, 9, 10 with distinct CSS class
+        const themeClass = `cv-${theme}`;
+        container.innerHTML = `
+          <div class="a4-page ${themeClass}">
             <div class="border-b pb-4 mb-4 flex justify-between items-center gap-4">
               <div>
                 <h1 class="text-2xl font-bold text-slate-900">${data.name}</h1>
-                <p class="text-blue-700 font-semibold text-xs mt-0.5">${data.title}</p>
+                <p class="font-semibold text-xs mt-0.5 text-slate-600">${data.title}</p>
                 <div class="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-slate-600 mt-2">
-                  <span>📧 ${data.email}</span>
-                  <span>📞 ${data.phone}</span>
-                  <span>📍 ${data.location}</span>
-                  <span>🔗 ${data.linkedin}</span>
+                  <span>📧 ${data.email}</span> <span>📞 ${data.phone}</span> <span>📍 ${data.location}</span> <span>🔗 ${data.linkedin}</span>
                   ${data.website ? `<span>🌐 ${data.website}</span>` : ''}
                 </div>
               </div>
@@ -837,742 +926,40 @@
               <div class="text-xs text-slate-700 mt-1">${formatBulletPoints(data.summary)}</div>
             </div>` : ''}
 
-            <div class="mb-4">
-              <h2 class="section-title">Work Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline">
-                      <h3 class="font-bold text-slate-800 text-xs">${exp.role} <span class="font-semibold text-blue-700">| ${exp.company}</span></h3>
-                      <span class="text-[10px] font-bold text-slate-500">${exp.date}</span>
-                    </div>
-                    <div class="text-[11px] text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Academic Qualifications</h2>
-              <div class="space-y-2">
-                ${educations.map(edu => `
-                  <div class="flex justify-between items-baseline">
-                    <div>
-                      <h3 class="font-bold text-slate-800 text-xs">${edu.degree} ${edu.cgpa ? `<span class="font-normal text-slate-600">(CGPA: ${edu.cgpa})</span>` : ''}</h3>
-                      <p class="text-[11px] text-slate-500">${edu.inst}</p>
-                    </div>
-                    <span class="text-[10px] font-semibold text-slate-500">${edu.year}</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            ${trainings.length ? `
-            <div class="mb-4">
-              <h2 class="section-title">Trainings & Certifications</h2>
-              <div class="space-y-2">
-                ${trainings.map(t => `
-                  <div class="flex justify-between items-baseline">
-                    <div>
-                      <h3 class="font-bold text-slate-800 text-xs">${t.title} <span class="font-normal text-slate-500">— ${t.inst}</span></h3>
-                      <p class="text-[10px] text-slate-600">${t.details}</p>
-                    </div>
-                    <span class="text-[10px] text-blue-700 font-semibold">${t.year}</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>` : ''}
+            ${expBlock}
+            ${eduBlock}
 
             <div class="mb-4">
               <h2 class="section-title">Core Competencies</h2>
               <div class="flex flex-wrap gap-1.5">
-                ${data.skills.map(s => `<span class="bg-blue-50 text-blue-900 border border-blue-200 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
+                ${data.skills.map(s => `<span class="bg-slate-100 border text-slate-800 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
               </div>
             </div>
 
-            ${references.length ? `
-            <div>
-              <h2 class="section-title">References</h2>
-              <div class="grid grid-cols-2 gap-4 text-xs">
-                ${references.map(r => `
-                  <div>
-                    <p class="font-bold text-slate-800">${r.name}</p>
-                    <p class="text-[11px] text-slate-600">${r.title}, ${r.company}</p>
-                    <p class="text-[10px] text-slate-500">Email: ${r.email} | Tel: ${r.phone}</p>
-                  </div>
-                `).join('')}
-              </div>
-            </div>` : ''}
+            ${trainBlock}
+            ${refBlock}
           </div>`;
       }
 
-      // -------------------------------------------------------------
-      // THEME 2: EXECUTIVE MINIMALIST (ATS Standard)
-      // -------------------------------------------------------------
-      else if (theme === 'theme-2') {
-        container.innerHTML = `
-          <div class="a4-page cv-theme-2">
-            <div class="text-center border-b pb-3 mb-4">
-              <h1 class="text-2xl font-black uppercase tracking-wider text-slate-900">${data.name}</h1>
-              <p class="text-xs font-semibold uppercase tracking-widest text-slate-500 mt-0.5">${data.title}</p>
-              <div class="flex justify-center flex-wrap gap-3 text-[11px] text-slate-600 mt-2 font-medium">
-                <span>${data.email}</span> &bull; <span>${data.phone}</span> &bull; <span>${data.location}</span> &bull; <span>${data.linkedin}</span>
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Executive Profile</h2>
-              <div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Professional Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline">
-                      <span class="font-bold text-xs text-slate-900">${exp.role} — <span class="font-normal italic text-slate-700">${exp.company}</span></span>
-                      <span class="text-[10px] text-slate-500">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Education</h2>
-              <div class="space-y-1.5 text-xs">
-                ${educations.map(e => `
-                  <div class="flex justify-between">
-                    <span><strong>${e.degree}</strong> - ${e.inst} ${e.cgpa ? `<span class="text-slate-600">(CGPA: ${e.cgpa})</span>` : ''}</span>
-                    <span class="text-slate-500">${e.year}</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            ${trainings.length ? `
-            <div class="mb-4">
-              <h2 class="section-title">Certifications & Training</h2>
-              <div class="space-y-1 text-xs">
-                ${trainings.map(t => `<div><strong>${t.title}</strong> (${t.inst}, ${t.year}) - <span class="text-slate-600">${t.details}</span></div>`).join('')}
-              </div>
-            </div>` : ''}
-
-            <div class="mb-4">
-              <h2 class="section-title">Core Competencies</h2>
-              <p class="text-xs text-slate-700 font-medium">${data.skills.join('  •  ')}</p>
-            </div>
-
-            ${references.length ? `
-            <div>
-              <h2 class="section-title">Professional References</h2>
-              <div class="grid grid-cols-2 gap-4 text-xs">
-                ${references.map(r => `
-                  <div>
-                    <p class="font-bold text-slate-800">${r.name}</p>
-                    <p class="text-slate-600">${r.title} — ${r.company}</p>
-                    <p class="text-[10px] text-slate-500">Contact: ${r.email} / ${r.phone}</p>
-                  </div>
-                `).join('')}
-              </div>
-            </div>` : ''}
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 3: CREATIVE / TECH SIDEBAR
-      // -------------------------------------------------------------
-      else if (theme === 'theme-3') {
-        const sidebarPhoto = (showPhoto && userPhotoData) ? 
-          `<img src="${userPhotoData}" class="w-24 h-28 object-cover rounded-lg border-2 border-sky-400 mb-3 mx-auto">` : '';
-
-        container.innerHTML = `
-          <div class="a4-page cv-theme-3">
-            <div class="sidebar space-y-4">
-              ${sidebarPhoto}
-              <div class="text-center">
-                <h1 class="text-lg font-bold text-white leading-tight">${data.name}</h1>
-                <p class="text-xs text-sky-400 font-medium mt-1">${data.title}</p>
-              </div>
-
-              <div>
-                <h2 class="section-title">Contact</h2>
-                <div class="text-[10px] space-y-1.5 text-slate-300 break-words">
-                  <p>📧 ${data.email}</p>
-                  <p>📞 ${data.phone}</p>
-                  <p>📍 ${data.location}</p>
-                  <p class="text-sky-400">🔗 ${data.linkedin}</p>
-                </div>
-              </div>
-
-              <div>
-                <h2 class="section-title">Skills & Expertise</h2>
-                <div class="flex flex-wrap gap-1">
-                  ${data.skills.map(s => `<span class="bg-slate-800 text-slate-200 text-[10px] px-2 py-0.5 rounded">${s}</span>`).join('')}
-                </div>
-              </div>
-
-              ${data.languages ? `
-              <div>
-                <h2 class="section-title">Languages</h2>
-                <p class="text-[10px] text-slate-300">${data.languages}</p>
-              </div>` : ''}
-
-              ${references.length ? `
-              <div>
-                <h2 class="section-title">References</h2>
-                <div class="space-y-2 text-[10px]">
-                  ${references.map(r => `<div><p class="font-bold text-white">${r.name}</p><p class="text-slate-400">${r.title}</p><p class="text-sky-400">${r.email}</p></div>`).join('')}
-                </div>
-              </div>` : ''}
-            </div>
-
-            <div class="main-content space-y-4">
-              <div>
-                <h2 class="section-title">Profile Summary</h2>
-                <div class="text-xs text-slate-600">${formatBulletPoints(data.summary)}</div>
-              </div>
-
-              <div>
-                <h2 class="section-title">Experience</h2>
-                <div class="space-y-3">
-                  ${experiences.map(exp => `
-                    <div>
-                      <div class="flex justify-between items-baseline">
-                        <h3 class="font-bold text-xs text-slate-800">${exp.role}</h3>
-                        <span class="text-[10px] font-semibold text-sky-600">${exp.date}</span>
-                      </div>
-                      <p class="text-[11px] text-slate-500 font-medium">${exp.company}</p>
-                      <div class="text-xs text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                    </div>
-                  `).join('')}
-                </div>
-              </div>
-
-              <div>
-                <h2 class="section-title">Education</h2>
-                <div class="space-y-2">
-                  ${educations.map(e => `<div><h3 class="font-bold text-xs text-slate-800">${e.degree}</h3><p class="text-[11px] text-slate-500">${e.inst} (${e.year}) ${e.cgpa ? `| CGPA: ${e.cgpa}` : ''}</p></div>`).join('')}
-                </div>
-              </div>
-
-              ${trainings.length ? `
-              <div>
-                <h2 class="section-title">Trainings & Certifications</h2>
-                <div class="space-y-1.5 text-xs text-slate-600">
-                  ${trainings.map(t => `<div><p class="font-bold text-slate-800">${t.title} (${t.year})</p><p class="text-[11px] text-slate-500">${t.inst} — ${t.details}</p></div>`).join('')}
-                </div>
-              </div>` : ''}
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 4: CLASSIC TRADITIONAL
-      // -------------------------------------------------------------
-      else if (theme === 'theme-4') {
-        container.innerHTML = `
-          <div class="a4-page cv-theme-4">
-            <div class="text-center pb-3 mb-3 border-b-2 border-stone-800">
-              <h1 class="text-2xl font-bold text-stone-900">${data.name}</h1>
-              <p class="text-xs italic text-stone-700 mt-0.5">${data.title}</p>
-              <p class="text-[11px] text-stone-600 mt-1">
-                ${data.location} | ${data.phone} | ${data.email} | ${data.linkedin}
-              </p>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Executive Summary</h2>
-              <div class="text-xs text-stone-800 leading-relaxed">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Professional Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline font-bold text-xs text-stone-900">
-                      <span>${exp.company} — ${exp.role}</span>
-                      <span class="font-normal italic">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-stone-700 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Education</h2>
-              <div class="space-y-1.5 text-xs text-stone-800">
-                ${educations.map(e => `
-                  <div class="flex justify-between font-bold">
-                    <span>${e.inst} — <span class="font-normal italic">${e.degree}</span> ${e.cgpa ? `<span class="font-normal text-stone-600">(CGPA: ${e.cgpa})</span>` : ''}</span>
-                    <span>${e.year}</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            ${trainings.length ? `
-            <div class="mb-4">
-              <h2 class="section-title">Certifications & Training</h2>
-              <div class="space-y-1 text-xs text-stone-700">
-                ${trainings.map(t => `<div><strong>${t.title}</strong>, ${t.inst} (${t.year})</div>`).join('')}
-              </div>
-            </div>` : ''}
-
-            <div class="grid grid-cols-2 gap-4 text-xs">
-              <div>
-                <h2 class="section-title">Core Skills</h2>
-                <p class="text-stone-700">${data.skills.join(', ')}</p>
-              </div>
-              ${references.length ? `
-              <div>
-                <h2 class="section-title">References</h2>
-                ${references.map(r => `<p class="text-stone-700 font-bold">${r.name}</p><p class="text-[10px] text-stone-600">${r.title}, ${r.company}</p>`).join('')}
-              </div>` : ''}
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 5: ELEGANT TEAL GRID
-      // -------------------------------------------------------------
-      else if (theme === 'theme-5') {
-        container.innerHTML = `
-          <div class="a4-page cv-theme-5">
-            <div class="bg-teal-50 -mx-[16mm] -mt-[16mm] p-[16mm] pb-4 mb-4 border-b border-teal-100 flex justify-between items-center gap-4">
-              <div>
-                <h1 class="text-2xl font-black text-teal-950">${data.name}</h1>
-                <p class="text-xs font-bold text-teal-700 uppercase tracking-wide mt-0.5">${data.title}</p>
-                <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-teal-900 mt-2 font-medium">
-                  <span>📧 ${data.email}</span>
-                  <span>📞 ${data.phone}</span>
-                  <span>📍 ${data.location}</span>
-                  <span>🔗 ${data.linkedin}</span>
-                </div>
-              </div>
-              ${photoHtml}
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Career Overview</h2>
-              <div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Work Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div class="border-l-2 border-teal-500 pl-3">
-                    <div class="flex justify-between items-baseline">
-                      <h3 class="font-bold text-xs text-slate-900">${exp.role} <span class="text-teal-700">@ ${exp.company}</span></h3>
-                      <span class="text-[10px] bg-teal-100 text-teal-800 font-semibold px-1.5 py-0.5 rounded">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Core Competencies</h2>
-              <div class="grid grid-cols-2 gap-1.5 text-xs text-slate-700">
-                ${data.skills.map(s => `<div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-teal-600 rounded-full"></span>${s}</div>`).join('')}
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <h2 class="section-title">Education</h2>
-                <div class="space-y-1.5 text-xs">
-                  ${educations.map(e => `<div><p class="font-bold text-slate-800">${e.degree}</p><p class="text-[11px] text-slate-500">${e.inst} (${e.year}) ${e.cgpa ? `• CGPA: ${e.cgpa}` : ''}</p></div>`).join('')}
-                </div>
-              </div>
-
-              ${trainings.length ? `
-              <div>
-                <h2 class="section-title">Trainings</h2>
-                <div class="space-y-1.5 text-xs text-slate-600">
-                  ${trainings.map(t => `<div><p class="font-bold text-slate-800">${t.title}</p><p class="text-[10px] text-slate-500">${t.inst} (${t.year})</p></div>`).join('')}
-                </div>
-              </div>` : ''}
-            </div>
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 6: COMPACT SLATE MODERN
-      // -------------------------------------------------------------
-      else if (theme === 'theme-6') {
-        container.innerHTML = `
-          <div class="a4-page cv-theme-6">
-            <div class="header-bg flex justify-between items-center gap-4 mb-4">
-              <div>
-                <h1 class="text-2xl font-bold tracking-tight">${data.name}</h1>
-                <p class="text-slate-300 font-medium text-xs mt-0.5">${data.title}</p>
-                <div class="flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-slate-300 mt-2">
-                  <span>${data.email}</span> &bull; <span>${data.phone}</span> &bull; <span>${data.location}</span>
-                </div>
-              </div>
-              ${photoHtml}
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Profile</h2>
-              <div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Professional Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline">
-                      <h3 class="font-bold text-xs text-slate-800">${exp.role} — <span class="text-slate-600 font-normal">${exp.company}</span></h3>
-                      <span class="text-[10px] font-bold text-slate-500">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <h2 class="section-title">Education</h2>
-                <div class="space-y-2">
-                  ${educations.map(e => `<div><p class="font-bold text-xs text-slate-800">${e.degree}</p><p class="text-[10px] text-slate-500">${e.inst} | ${e.year} ${e.cgpa ? `| CGPA: ${e.cgpa}` : ''}</p></div>`).join('')}
-                </div>
-              </div>
-              <div>
-                <h2 class="section-title">Key Skills</h2>
-                <div class="flex flex-wrap gap-1">
-                  ${data.skills.map(s => `<span class="bg-slate-100 text-slate-800 text-[10px] px-2 py-0.5 rounded font-medium">${s}</span>`).join('')}
-                </div>
-              </div>
-            </div>
-
-            ${references.length ? `
-            <div>
-              <h2 class="section-title">References</h2>
-              <div class="grid grid-cols-2 gap-4 text-xs">
-                ${references.map(r => `<div><p class="font-bold text-slate-800">${r.name}</p><p class="text-[10px] text-slate-500">${r.title}, ${r.company}</p></div>`).join('')}
-              </div>
-            </div>` : ''}
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 7: EXECUTIVE VISUAL BANNER
-      // -------------------------------------------------------------
-      else if (theme === 'theme-7') {
-        const bannerPhoto = (showPhoto && userPhotoData) ? 
-          `<img src="${userPhotoData}" class="w-24 h-28 object-cover rounded-lg border-2 border-indigo-400 shadow-lg flex-shrink-0">` : '';
-
-        container.innerHTML = `
-          <div class="a4-page cv-theme-7">
-            <div class="banner flex justify-between items-center gap-4">
-              <div>
-                <h1 class="text-2xl font-black tracking-wide">${data.name}</h1>
-                <p class="text-indigo-200 text-xs font-semibold uppercase tracking-widest mt-1">${data.title}</p>
-                <div class="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-indigo-100 mt-3 font-medium">
-                  <span>📧 ${data.email}</span>
-                  <span>📞 ${data.phone}</span>
-                  <span>📍 ${data.location}</span>
-                  <span>🔗 ${data.linkedin}</span>
-                </div>
-              </div>
-              ${bannerPhoto}
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Executive Summary</h2>
-              <div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Work Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline">
-                      <h3 class="font-bold text-xs text-indigo-950">${exp.role} <span class="font-semibold text-indigo-700">| ${exp.company}</span></h3>
-                      <span class="text-[10px] font-bold text-slate-500">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <h2 class="section-title">Education</h2>
-                <div class="space-y-2">
-                  ${educations.map(e => `<div><p class="font-bold text-xs text-slate-800">${e.degree}</p><p class="text-[10px] text-slate-500">${e.inst} (${e.year}) ${e.cgpa ? `• CGPA: ${e.cgpa}` : ''}</p></div>`).join('')}
-                </div>
-              </div>
-
-              <div>
-                <h2 class="section-title">Skills</h2>
-                <div class="flex flex-wrap gap-1">
-                  ${data.skills.map(s => `<span class="bg-indigo-50 text-indigo-900 text-[10px] px-2 py-0.5 rounded font-semibold border border-indigo-200">${s}</span>`).join('')}
-                </div>
-              </div>
-            </div>
-
-            ${trainings.length ? `
-            <div class="mb-4">
-              <h2 class="section-title">Trainings & Certifications</h2>
-              <div class="space-y-1 text-xs">
-                ${trainings.map(t => `<div><strong>${t.title}</strong> — ${t.inst} (${t.year})</div>`).join('')}
-              </div>
-            </div>` : ''}
-
-            ${references.length ? `
-            <div>
-              <h2 class="section-title">References</h2>
-              <div class="grid grid-cols-2 gap-4 text-xs">
-                ${references.map(r => `<div><p class="font-bold text-slate-800">${r.name}</p><p class="text-[10px] text-slate-500">${r.title}, ${r.company} (${r.email})</p></div>`).join('')}
-              </div>
-            </div>` : ''}
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 8: VIBRANT EMERALD ACCENT
-      // -------------------------------------------------------------
-      else if (theme === 'theme-8') {
-        container.innerHTML = `
-          <div class="a4-page cv-theme-8">
-            <div class="border-b-2 border-emerald-500 pb-4 mb-4 flex justify-between items-center gap-4">
-              <div>
-                <h1 class="text-2xl font-black text-slate-900 tracking-tight">${data.name}</h1>
-                <p class="text-emerald-600 font-bold text-xs uppercase tracking-wider mt-0.5">${data.title}</p>
-                <div class="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-600 mt-2 font-medium">
-                  <span>✉️ ${data.email}</span>
-                  <span>📱 ${data.phone}</span>
-                  <span>📍 ${data.location}</span>
-                  <span>🔗 ${data.linkedin}</span>
-                </div>
-              </div>
-              ${photoHtml}
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Professional Summary</h2>
-              <div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Career Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline">
-                      <h3 class="font-bold text-xs text-slate-900">${exp.role} <span class="text-emerald-700">@ ${exp.company}</span></h3>
-                      <span class="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Education & Qualifications</h2>
-              <div class="space-y-2">
-                ${educations.map(e => `
-                  <div class="flex justify-between items-baseline">
-                    <div>
-                      <h3 class="font-bold text-xs text-slate-900">${e.degree} ${e.cgpa ? `<span class="font-medium text-emerald-700">(CGPA: ${e.cgpa})</span>` : ''}</h3>
-                      <p class="text-[11px] text-slate-500">${e.inst}</p>
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-700">${e.year}</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Technical & Soft Skills</h2>
-              <div class="flex flex-wrap gap-1.5">
-                ${data.skills.map(s => `<span class="bg-emerald-50 text-emerald-900 border border-emerald-200 text-[10px] px-2.5 py-0.5 rounded-full font-semibold">${s}</span>`).join('')}
-              </div>
-            </div>
-
-            ${references.length ? `
-            <div>
-              <h2 class="section-title">References</h2>
-              <div class="grid grid-cols-2 gap-4 text-xs">
-                ${references.map(r => `
-                  <div>
-                    <p class="font-bold text-slate-900">${r.name}</p>
-                    <p class="text-[11px] text-slate-600">${r.title} — ${r.company}</p>
-                    <p class="text-[10px] text-slate-500">${r.email} | ${r.phone}</p>
-                  </div>
-                `).join('')}
-              </div>
-            </div>` : ''}
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 9: NORDIC MONOCHROMATIC
-      // -------------------------------------------------------------
-      else if (theme === 'theme-9') {
-        container.innerHTML = `
-          <div class="a4-page cv-theme-9">
-            <div class="flex justify-between items-start border-b-2 border-zinc-900 pb-4 mb-4">
-              <div>
-                <h1 class="text-3xl font-black uppercase tracking-tight text-zinc-900">${data.name}</h1>
-                <p class="text-xs font-bold text-zinc-600 uppercase tracking-widest mt-1">${data.title}</p>
-                <p class="text-[11px] text-zinc-600 font-medium mt-2">
-                  ${data.email} &nbsp;|&nbsp; ${data.phone} &nbsp;|&nbsp; ${data.location} &nbsp;|&nbsp; ${data.linkedin}
-                </p>
-              </div>
-              ${photoHtml}
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Executive Profile</h2>
-              <div class="text-xs text-zinc-800">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Employment History</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline font-bold text-xs text-zinc-900">
-                      <span>${exp.role} <span class="font-normal text-zinc-600">— ${exp.company}</span></span>
-                      <span class="text-[10px] text-zinc-500">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-zinc-700 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <h2 class="section-title">Education</h2>
-                <div class="space-y-2">
-                  ${educations.map(e => `<div><p class="font-bold text-xs text-zinc-900">${e.degree}</p><p class="text-[11px] text-zinc-600">${e.inst} (${e.year}) ${e.cgpa ? `• CGPA: ${e.cgpa}` : ''}</p></div>`).join('')}
-                </div>
-              </div>
-
-              <div>
-                <h2 class="section-title">Expertise</h2>
-                <div class="flex flex-wrap gap-1">
-                  ${data.skills.map(s => `<span class="bg-zinc-100 text-zinc-900 border border-zinc-300 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
-                </div>
-              </div>
-            </div>
-
-            ${trainings.length ? `
-            <div class="mb-4">
-              <h2 class="section-title">Certifications</h2>
-              <div class="space-y-1 text-xs text-zinc-800">
-                ${trainings.map(t => `<div><strong>${t.title}</strong> — ${t.inst} (${t.year})</div>`).join('')}
-              </div>
-            </div>` : ''}
-
-            ${references.length ? `
-            <div>
-              <h2 class="section-title">References</h2>
-              <div class="grid grid-cols-2 gap-4 text-xs">
-                ${references.map(r => `<div><p class="font-bold text-zinc-900">${r.name}</p><p class="text-[10px] text-zinc-600">${r.title}, ${r.company}</p></div>`).join('')}
-              </div>
-            </div>` : ''}
-          </div>`;
-      }
-
-      // -------------------------------------------------------------
-      // THEME 10: WARM AMBER & CORAL EXECUTIVE
-      // -------------------------------------------------------------
-      else if (theme === 'theme-10') {
-        container.innerHTML = `
-          <div class="a4-page cv-theme-10">
-            <div class="bg-amber-50/70 -mx-[16mm] -mt-[16mm] p-[16mm] pb-4 mb-4 border-b border-orange-100 flex justify-between items-center gap-4">
-              <div>
-                <h1 class="text-2xl font-black text-slate-900">${data.name}</h1>
-                <p class="text-xs font-bold text-orange-600 uppercase tracking-wider mt-0.5">${data.title}</p>
-                <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-700 mt-2 font-medium">
-                  <span>✉️ ${data.email}</span>
-                  <span>📞 ${data.phone}</span>
-                  <span>📍 ${data.location}</span>
-                  <span>🔗 ${data.linkedin}</span>
-                </div>
-              </div>
-              ${photoHtml}
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Executive Summary</h2>
-              <div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div>
-            </div>
-
-            <div class="mb-4">
-              <h2 class="section-title">Work Experience</h2>
-              <div class="space-y-3">
-                ${experiences.map(exp => `
-                  <div>
-                    <div class="flex justify-between items-baseline">
-                      <h3 class="font-bold text-xs text-slate-900">${exp.role} <span class="text-orange-600">| ${exp.company}</span></h3>
-                      <span class="text-[10px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded">${exp.date}</span>
-                    </div>
-                    <div class="text-xs text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <h2 class="section-title">Education</h2>
-                <div class="space-y-2">
-                  ${educations.map(e => `<div><p class="font-bold text-xs text-slate-900">${e.degree}</p><p class="text-[11px] text-slate-500">${e.inst} (${e.year}) ${e.cgpa ? `• CGPA: ${e.cgpa}` : ''}</p></div>`).join('')}
-                </div>
-              </div>
-
-              <div>
-                <h2 class="section-title">Skills</h2>
-                <div class="flex flex-wrap gap-1">
-                  ${data.skills.map(s => `<span class="bg-amber-100/60 text-amber-900 border border-amber-300/60 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
-                </div>
-              </div>
-            </div>
-
-            ${trainings.length ? `
-            <div class="mb-4">
-              <h2 class="section-title">Certifications & Training</h2>
-              <div class="space-y-1 text-xs">
-                ${trainings.map(t => `<div><strong>${t.title}</strong> — ${t.inst} (${t.year})</div>`).join('')}
-              </div>
-            </div>` : ''}
-
-            ${references.length ? `
-            <div>
-              <h2 class="section-title">References</h2>
-              <div class="grid grid-cols-2 gap-4 text-xs">
-                ${references.map(r => `<div><p class="font-bold text-slate-900">${r.name}</p><p class="text-[10px] text-slate-500">${r.title}, ${r.company} (${r.email})</p></div>`).join('')}
-              </div>
-            </div>` : ''}
-          </div>`;
-      }
-
-      // Re-initialize Lucide Icons inside dynamic preview
       lucide.createIcons();
     }
 
-    /* =========================================================
-       EXPORT HIGH-RES PDF FUNCTION
-       ========================================================= */
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.innerText = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 4000);
+    }
+
     function downloadPDF() {
+      showToast("Starting high-resolution PDF download...");
+
       const element = document.getElementById('cv-render-area').firstElementChild;
       const name = document.getElementById('cv-name').value || 'Professional_CV';
       
@@ -1584,12 +971,13 @@
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save();
+      html2pdf().set(opt).from(element).save().then(() => {
+        showToast("CV Downloaded Successfully!");
+      }).catch(err => {
+        showToast("Download failed. Please try again.");
+      });
     }
 
-    /* =========================================================
-       INITIALIZATION ON PAGE LOAD
-       ========================================================= */
     window.onload = () => {
       renderExperienceForm();
       renderEducationForm();
