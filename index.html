@@ -6,7 +6,6 @@
     <title>Free Online CV Builder & Resume Maker | Altra Solve</title>
     <meta name="title" content="Free Online CV Builder & Resume Maker | Altra Solve" />
     <meta name="description" content="Create a professional, ATS-friendly resume or CV in minutes for free. Easy-to-use templates, instant PDF download, and no credit card required." />
-    <meta name="keywords" content="free cv builder, online resume maker, ats friendly cv maker, professional resume generator, altra solve cv builder" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Altra Solve" />
 
@@ -15,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
@@ -23,7 +22,6 @@
             color: #f8fafc;
         }
 
-        /* Standard A4 CV Container Sizing & Scaling for Mobile responsiveness */
         .a4-wrapper {
             width: 100%;
             display: flex;
@@ -34,8 +32,8 @@
 
         .a4-page {
             width: 210mm;
-            height: auto;
-            padding: 16mm;
+            min-height: 297mm;
+            padding: 12mm 14mm;
             margin: 0 auto;
             background: #ffffff;
             color: #1e293b;
@@ -45,18 +43,31 @@
             flex-shrink: 0;
         }
 
-        /* Prevent section breaks inside PDF */
         .cv-section-block {
+            break-inside: avoid-page !important;
             page-break-inside: avoid !important;
-            break-inside: avoid !important;
+            margin-bottom: 6px !important;
+        }
+
+        .cv-item-block {
+            break-inside: avoid-page !important;
+            page-break-inside: avoid !important;
+            margin-bottom: 6px !important;
         }
 
         .section-title {
             page-break-after: avoid !important;
             break-after: avoid !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin-bottom: 3px !important;
         }
 
-        /* Mobile scaling for A4 preview */
+        .cv-item-block li {
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+        }
+
         @media (max-width: 768px) {
             .a4-page {
                 transform: scale(0.42);
@@ -82,7 +93,6 @@
                 box-shadow: none;
                 margin: 0;
                 width: 100%;
-                height: auto;
                 transform: none !important;
             }
 
@@ -91,12 +101,9 @@
             }
         }
 
-        /* -------------------------------------------------------------
-        THEMES STYLES
-        ------------------------------------------------------------- */
-        /* Theme 1 */
+        /* 10 UNIQUE INTERNATIONAL STANDARD THEMES */
         .cv-theme-1 {
-            border-top: 8px solid #1e40af;
+            border-top: 6px solid #1e40af;
         }
 
             .cv-theme-1 .section-title {
@@ -106,46 +113,43 @@
                 letter-spacing: 0.05em;
                 color: #1e40af;
                 border-bottom: 2px solid #e2e8f0;
-                padding-bottom: 4px;
-                margin-bottom: 10px;
+                padding-bottom: 3px;
             }
 
-        /* Theme 2 */
         .cv-theme-2 {
             font-family: 'Inter', sans-serif;
             color: #0f172a;
         }
 
             .cv-theme-2 .section-title {
-                font-size: 0.8rem;
+                font-size: 0.82rem;
                 font-weight: 800;
                 text-transform: uppercase;
-                letter-spacing: 0.1em;
-                color: #1e293b;
-                background-color: #f1f5f9;
-                padding: 4px 8px;
-                border-left: 4px solid #0f172a;
-                margin-bottom: 10px;
+                letter-spacing: 0.08em;
+                color: #0f172a;
+                border-bottom: 1px solid #0f172a;
+                padding-bottom: 2px;
             }
 
-        /* Theme 3 Sidebar */
         .cv-theme-3 {
             padding: 0 !important;
             display: flex;
-            min-height: 297mm;
         }
 
             .cv-theme-3 .sidebar {
                 width: 32%;
                 background: #0f172a;
                 color: #ffffff;
-                padding: 14mm 8mm;
+                padding: 12mm 8mm;
+                min-height: 297mm;
+                box-sizing: border-box;
             }
 
             .cv-theme-3 .main-content {
                 width: 68%;
-                padding: 14mm 10mm;
+                padding: 12mm 10mm;
                 color: #1e293b;
+                box-sizing: border-box;
             }
 
             .cv-theme-3 .sidebar .section-title {
@@ -156,7 +160,7 @@
                 color: #38bdf8;
                 border-bottom: 1px solid #334155;
                 padding-bottom: 4px;
-                margin-bottom: 8px;
+                margin-bottom: 6px;
             }
 
             .cv-theme-3 .main-content .section-title {
@@ -166,11 +170,9 @@
                 letter-spacing: 0.05em;
                 color: #0f172a;
                 border-bottom: 2px solid #0f172a;
-                padding-bottom: 4px;
-                margin-bottom: 10px;
+                padding-bottom: 3px;
             }
 
-        /* Theme 4 Traditional Serif */
         .cv-theme-4 {
             font-family: 'Merriweather', serif;
             color: #1c1917;
@@ -181,38 +183,34 @@
             }
 
             .cv-theme-4 .section-title {
-                font-size: 0.88rem;
+                font-size: 0.85rem;
                 font-weight: 700;
                 text-transform: uppercase;
                 color: #27272a;
                 border-bottom: 1px solid #71717a;
                 padding-bottom: 2px;
-                margin-bottom: 10px;
                 text-align: center;
             }
 
-        /* Theme 5 Teal */
         .cv-theme-5 {
-            border-left: 10px solid #0d9488;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
             .cv-theme-5 .section-title {
-                font-size: 0.82rem;
-                font-weight: 700;
+                font-size: 0.8rem;
+                font-weight: 800;
                 text-transform: uppercase;
-                letter-spacing: 0.05em;
                 color: #0d9488;
-                border-bottom: 1.5px solid #ccfbf1;
-                padding-bottom: 4px;
-                margin-bottom: 10px;
+                border-bottom: 2px solid #ccfbf1;
+                padding-bottom: 3px;
             }
 
-        /* Theme 6 Slate Modern Header */
-        .cv-theme-6 .header-bg {
-            background: #334155;
-            color: #ffffff;
-            padding: 16px;
+        .cv-theme-6 .header-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
             border-radius: 8px;
+            margin-bottom: 10px;
         }
 
         .cv-theme-6 .section-title {
@@ -221,16 +219,14 @@
             text-transform: uppercase;
             color: #334155;
             border-bottom: 2px dashed #94a3b8;
-            padding-bottom: 4px;
-            margin-bottom: 10px;
+            padding-bottom: 3px;
         }
 
-        /* Theme 7 Visual Banner */
         .cv-theme-7 .banner {
             background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
             color: #ffffff;
-            margin: -16mm -16mm 12mm -16mm;
-            padding: 12mm 16mm;
+            margin: -12mm -14mm 10mm -14mm;
+            padding: 12mm 14mm;
         }
 
         .cv-theme-7 .section-title {
@@ -240,12 +236,10 @@
             color: #4338ca;
             border-left: 4px solid #4338ca;
             padding-left: 8px;
-            margin-bottom: 10px;
         }
 
-        /* Theme 8 Emerald Accent */
         .cv-theme-8 {
-            border-top: 8px solid #059669;
+            border-left: 8px solid #059669;
         }
 
             .cv-theme-8 .section-title {
@@ -255,30 +249,33 @@
                 letter-spacing: 0.05em;
                 color: #059669;
                 border-bottom: 2px solid #a7f3d0;
-                padding-bottom: 4px;
-                margin-bottom: 10px;
+                padding-bottom: 3px;
             }
 
-        /* Theme 9 Nordic Clean */
         .cv-theme-9 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             color: #09090b;
         }
 
-            .cv-theme-9 .section-title {
-                font-size: 0.8rem;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-                color: #09090b;
-                border-bottom: 1.5px solid #09090b;
-                padding-bottom: 3px;
-                margin-bottom: 10px;
+            .cv-theme-9 h1 {
+                font-family: 'Inter', sans-serif;
+                font-weight: 900;
+                letter-spacing: -0.03em;
             }
 
-        /* Theme 10 Amber Accent */
+            .cv-theme-9 .section-title {
+                font-size: 0.78rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                color: #09090b;
+                background: #f4f4f5;
+                padding: 3px 6px;
+                border-left: 3px solid #09090b;
+            }
+
         .cv-theme-10 {
-            border-left: 10px solid #ea580c;
+            border-top: 6px solid #ea580c;
         }
 
             .cv-theme-10 .section-title {
@@ -288,8 +285,7 @@
                 letter-spacing: 0.05em;
                 color: #ea580c;
                 border-bottom: 2px solid #ffedd5;
-                padding-bottom: 4px;
-                margin-bottom: 10px;
+                padding-bottom: 3px;
             }
 
         details summary::-webkit-details-marker {
@@ -316,52 +312,66 @@
                 border-color: #2563eb;
                 outline: 2px solid rgba(37, 99, 235, 0.2);
             }
-    </style>
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          "name": "Professional CV Builder",
-          "url": "https://cvstudio.altrasolve.com",
-          "applicationCategory": "BusinessApplication",
-          "operatingSystem": "All",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "author": {
-            "@type": "Organization",
-            "name": "Altra Solve"
-          }
+
+        /* Mobile Slide Transition Styles */
+        @media (max-width: 1023px) {
+            .mobile-slide-container {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .mobile-panel {
+                width: 100%;
+                transition: transform 0.35s ease-in-out, opacity 0.35s ease-in-out;
+            }
+
+            .slide-to-edit .preview-panel {
+                transform: translateX(-100%);
+                opacity: 0;
+                position: absolute;
+                pointer-events: none;
+            }
+
+            .slide-to-edit .edit-panel {
+                transform: translateX(0);
+                opacity: 1;
+                position: relative;
+                pointer-events: auto;
+            }
+
+            .slide-to-preview .edit-panel {
+                transform: translateX(-100%);
+                opacity: 0;
+                position: absolute;
+                pointer-events: none;
+            }
+
+            .slide-to-preview .preview-panel {
+                transform: translateX(0);
+                opacity: 1;
+                position: relative;
+                pointer-events: auto;
+            }
         }
-    </script>
+    </style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-900 text-slate-100">
 
     <section class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 border-b border-indigo-900/50 py-6 px-4 no-print">
         <div class="max-w-[1400px] mx-auto flex flex-col items-center text-center space-y-4">
             <a href="https://altrasolve.com" target="_blank" rel="noopener noreferrer" class="inline-block transition transform hover:scale-105">
-                <img src="logo.png" alt="Altra Solve Logo" class="h-12 md:h-16 object-contain" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
-                <div id="logo-fallback" class="hidden text-2xl font-black text-blue-500 tracking-wider">ALTRA SOLVE</div>
+                <div class="text-2xl font-black text-blue-500 tracking-wider">ALTRA SOLVE</div>
             </a>
             <span class="inline-block bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-widest">
                 CUSTOM SOFTWARE DEVELOPMENT
             </span>
             <h2 class="text-xl md:text-3xl font-extrabold text-white max-w-3xl leading-tight">
-                We Understand Your Business. We Build Software That Grows It.
+                International Standard ProCV Engine
             </h2>
             <p class="text-xs md:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                From idea to scalable product — <a href="https://altrasolve.com" target="_blank" class="text-blue-400 font-bold hover:underline">Altra Solve</a> turns your unique workflow into powerful digital solutions.
+                Build global ATS-compliant professional resumes instantly with 10 distinct architectural layouts.
             </p>
-            <div class="flex flex-wrap justify-center gap-3 pt-2">
-                <a href="https://altrasolve.com" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-5 py-2.5 rounded-lg transition shadow-lg shadow-blue-600/30 flex items-center gap-2">
-                    <i data-lucide="calendar" class="w-4 h-4"></i> Book Free Consultation
-                </a>
-                <a href="https://altrasolve.com" target="_blank" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs md:text-sm font-bold px-5 py-2.5 rounded-lg transition flex items-center gap-2">
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i> View Our Work
-                </a>
-            </div>
         </div>
     </section>
 
@@ -378,44 +388,48 @@
                 </div>
                 <div>
                     <h1 class="font-extrabold text-base md:text-lg text-white leading-tight tracking-wide flex items-center gap-2">
-                        ProCV Studio <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full border border-blue-500/30 font-medium">10-Theme Suite</span>
+                        ProCV Studio <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full border border-blue-500/30 font-medium hidden sm:inline-block">10 Unique Global Themes</span>
                     </h1>
-                    <p class="text-[11px] text-slate-400">Professional CV Engine & Dynamic PDF Generator</p>
+                    <p class="text-[11px] text-slate-400">Enterprise Resume Suite & PDF Generator</p>
                 </div>
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="https://altrasolve.com" target="_blank" class="hidden sm:flex text-xs bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-full items-center gap-1.5 text-slate-300 hover:border-blue-500/50 transition">
-                    <span>Developed by</span>
-                    <span class="font-bold text-blue-400">Altra Solve</span>
-                </a>
+                <!-- Mobile Slide Toggle Button -->
+                <button id="mobile-toggle-btn" onclick="toggleMobileView()" class="lg:hidden bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3.5 py-2.5 rounded-lg flex items-center gap-1.5 shadow-md transition">
+                    <i id="mobile-toggle-icon" data-lucide="edit-3" class="w-4 h-4"></i>
+                    <span id="mobile-toggle-text">Edit CV</span>
+                </button>
+
                 <button onclick="downloadPDF()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-lg transition transform active:scale-95">
-                    <i data-lucide="download-cloud" class="w-4 h-4"></i> Export High-Res PDF
+                    <i data-lucide="download-cloud" class="w-4 h-4"></i> <span class="hidden sm:inline">Export High-Res</span> PDF
                 </button>
             </div>
         </div>
     </header>
 
     <main class="max-w-[1700px] mx-auto px-4 py-6 flex-grow w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Mobile Slide Wrapper Class (slide-to-preview by default) -->
+        <div id="main-grid-container" class="mobile-slide-container slide-to-preview grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-            <div class="lg:col-span-5 bg-slate-950 p-4 md:p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4 max-h-[88vh] overflow-y-auto no-print">
+            <!-- Edit Forms Panel -->
+            <div id="edit-panel" class="mobile-panel edit-panel lg:col-span-5 bg-slate-950 p-4 md:p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4 max-h-[88vh] overflow-y-auto no-print">
 
                 <div class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 space-y-2">
                     <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                        <i data-lucide="palette" class="w-4 h-4 text-blue-400"></i> Select Resume Theme (10 Enterprise Templates)
+                        <i data-lucide="palette" class="w-4 h-4 text-blue-400"></i> Select Unique International Theme
                     </label>
                     <select id="cv-theme-select" onchange="renderCV()" class="w-full p-2.5 text-xs font-semibold border border-slate-700 rounded-lg bg-slate-950 text-slate-100 focus:ring-2 focus:ring-blue-500">
-                        <option value="theme-1">1. Modern Corporate (Blue Accent)</option>
-                        <option value="theme-2">2. Executive Minimalist (ATS Friendly)</option>
+                        <option value="theme-1">1. Modern Corporate (Top Border Accent)</option>
+                        <option value="theme-2">2. Global ATS Minimalist (High Contrast Clean)</option>
                         <option value="theme-3">3. Tech & Creative Sidebar (2-Column Dark Sidebar)</option>
-                        <option value="theme-4">4. Classic Traditional (Serif / Finance & Legal)</option>
-                        <option value="theme-5">5. Elegant Teal Grid (Engineering & Operations)</option>
-                        <option value="theme-6">6. Compact Slate Modern (Header Card)</option>
+                        <option value="theme-4">4. Classic Serif / Academic (Centered Traditional)</option>
+                        <option value="theme-5">5. Modern Split Grid (Dual Column Clean Layout)</option>
+                        <option value="theme-6">6. Floating Header Card (Contemporary Business)</option>
                         <option value="theme-7">7. Executive Visual Banner (Modern Dark Header)</option>
-                        <option value="theme-8">8. Vibrant Emerald Accent (Tech Startups)</option>
-                        <option value="theme-9">9. Nordic Monochromatic (Ultra-Clean)</option>
-                        <option value="theme-10">10. Warm Amber Accent (Marketing & Executive)</option>
+                        <option value="theme-8">8. Agile Tech Startup (Emerald Left Border)</option>
+                        <option value="theme-9">9. Nordic Monochromatic (Swiss Monospace Style)</option>
+                        <option value="theme-10">10. Warm Amber Leadership (Executive Accent)</option>
                     </select>
                 </div>
 
@@ -426,7 +440,6 @@
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
                         <div class="p-4 space-y-3 bg-slate-950 text-slate-200">
-
                             <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
                                 <label class="block text-[11px] font-bold text-slate-300">Passport Size Profile Photo</label>
                                 <div class="flex items-center gap-3">
@@ -446,39 +459,39 @@
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Full Name</label>
-                                    <input type="text" id="cv-name" value="Dr. Tanjim Ahmed" oninput="renderCV()" class="input-field">
+                                    <input type="text" id="cv-name" value="Tanvir Ahmed" oninput="renderCV()" class="input-field">
                                 </div>
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Job Title / Designation</label>
-                                    <input type="text" id="cv-title" value="Senior Operations & Supply Chain Director" oninput="renderCV()" class="input-field">
+                                    <input type="text" id="cv-title" value="Senior Business Development & Operations Manager" oninput="renderCV()" class="input-field">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Email Address</label>
-                                    <input type="email" id="cv-email" value="tanjim.ahmed@example.com" oninput="renderCV()" class="input-field">
+                                    <input type="email" id="cv-email" value="tanvir.ahmed@example.com" oninput="renderCV()" class="input-field">
                                 </div>
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Phone Number</label>
-                                    <input type="text" id="cv-phone" value="+880 1712 345678" oninput="renderCV()" class="input-field">
+                                    <input type="text" id="cv-phone" value="+880 1811 987654" oninput="renderCV()" class="input-field">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Location (City, Country)</label>
-                                    <input type="text" id="cv-location" value="Gulshan, Dhaka, Bangladesh" oninput="renderCV()" class="input-field">
+                                    <input type="text" id="cv-location" value="Dhaka, Bangladesh" oninput="renderCV()" class="input-field">
                                 </div>
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">LinkedIn URL</label>
-                                    <input type="text" id="cv-linkedin" value="linkedin.com/in/tanjimahmed" oninput="renderCV()" class="input-field">
+                                    <input type="text" id="cv-linkedin" value="linkedin.com/in/tanvirahmed" oninput="renderCV()" class="input-field">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="text-[10px] font-bold text-slate-300">Website / Portfolio</label>
-                                <input type="text" id="cv-website" value="tanjimahmed.com" oninput="renderCV()" class="input-field">
+                                <input type="text" id="cv-website" value="tanvirahmed.portfolio.com" oninput="renderCV()" class="input-field">
                             </div>
                         </div>
                     </details>
@@ -491,23 +504,28 @@
                         <div class="p-4 bg-slate-950 space-y-2">
                             <div class="flex justify-between items-center">
                                 <label class="text-[10px] font-bold text-slate-300">Summary Text</label>
-                                <button type="button" onclick="insertBulletToSummary()" class="text-[10px] bg-slate-900 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2.5 py-1 rounded flex items-center gap-1 font-semibold transition">
-                                    <i data-lucide="list" class="w-3 h-3"></i> + Add Bullet Point (•)
-                                </button>
+                                <div class="flex gap-1.5">
+                                    <button type="button" onclick="insertBoldToSummary()" class="text-[10px] bg-slate-900 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2.5 py-1 rounded flex items-center gap-1 font-bold transition" title="Make selected text bold">
+                                        <b>B</b>
+                                    </button>
+                                    <button type="button" onclick="insertBulletToSummary()" class="text-[10px] bg-slate-900 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2.5 py-1 rounded flex items-center gap-1 font-semibold transition">
+                                        <i data-lucide="list" class="w-3 h-3"></i> + Bullet
+                                    </button>
+                                </div>
                             </div>
-                            <textarea id="cv-summary" rows="5" oninput="renderCV()" class="input-field leading-relaxed" placeholder="Write comprehensive executive summary...">Accomplished Executive with over 10+ years of multi-sector leadership in supply chain engineering, operational governance, and cross-functional team direction. Recognized for restructuring regional fulfillment networks, achieving 25% overhead cost reductions, and spearheading SAP ERP deployment across 5 South Asian distribution nodes.</textarea>
+                            <textarea id="cv-summary" rows="5" oninput="renderCV()" class="input-field leading-relaxed">Result-driven **Business Development & Operations Manager** with over 7 years of expertise in strategic planning, cross-functional team leadership, and driving revenue growth. Proven track record in optimizing corporate operations, managing key client relationships, and executing high-impact projects that align with organizational goals. Adept at market analysis, financial budgeting, and building sustainable long-term business partnerships.</textarea>
                         </div>
                     </details>
 
                     <details open class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
-                            <span class="flex items-center gap-2 text-blue-400"><i data-lucide="briefcase" class="w-4 h-4"></i> Work Experience (Dynamic)</span>
+                            <span class="flex items-center gap-2 text-blue-400"><i data-lucide="briefcase" class="w-4 h-4"></i> Work Experience & Projects</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
                         <div class="p-4 space-y-3 bg-slate-950">
                             <div id="experience-container" class="space-y-3"></div>
                             <button type="button" onclick="addExperience()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
-                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Another Work Experience
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Work Experience / Project
                             </button>
                         </div>
                     </details>
@@ -527,7 +545,7 @@
 
                     <details class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
-                            <span class="flex items-center gap-2 text-blue-400"><i data-lucide="award" class="w-4 h-4"></i> Trainings, Workshops & Certifications</span>
+                            <span class="flex items-center gap-2 text-blue-400"><i data-lucide="award" class="w-4 h-4"></i> Trainings & Certifications</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
                         <div class="p-4 space-y-3 bg-slate-950">
@@ -545,12 +563,12 @@
                         </summary>
                         <div class="p-4 space-y-3 bg-slate-950 text-slate-200">
                             <div>
-                                <label class="text-[10px] font-bold text-slate-300">Core Competencies / Skills (Comma Separated)</label>
-                                <textarea id="cv-skills" rows="3" oninput="renderCV()" class="input-field">Strategic Supply Chain, ERP Implementation (SAP), Lean Six Sigma Black Belt, Cross-Functional Leadership, Inventory Optimization, Operations Governance, Vendor Negotiations</textarea>
+                                <label class="text-[10px] font-bold text-slate-300">Core Competencies / Technical Stack (Comma Separated)</label>
+                                <textarea id="cv-skills" rows="3" oninput="renderCV()" class="input-field">Strategic Planning, Project Management, Team Leadership, Business Development, Operations Management, Financial Budgeting, Client Relations, Risk Assessment, Data Analysis, Agile Methodologies</textarea>
                             </div>
                             <div>
                                 <label class="text-[10px] font-bold text-slate-300">Languages Spoken</label>
-                                <input type="text" id="cv-languages" value="English (Professional Native), Bengali (Native), Hindi (Conversational)" oninput="renderCV()" class="input-field">
+                                <input type="text" id="cv-languages" value="English (Full Professional Proficiency), Bengali (Native), Hindi (Conversational)" oninput="renderCV()" class="input-field">
                             </div>
                         </div>
                     </details>
@@ -571,12 +589,13 @@
 
             </div>
 
-            <div class="lg:col-span-7 bg-slate-950 p-3 md:p-6 rounded-2xl border border-slate-800 overflow-hidden flex flex-col items-center justify-start min-h-[88vh]">
+            <!-- Live Preview Panel -->
+            <div id="preview-panel" class="mobile-panel preview-panel lg:col-span-7 bg-slate-950 p-3 md:p-6 rounded-2xl border border-slate-800 overflow-hidden flex flex-col items-center justify-start min-h-[88vh]">
                 <div class="w-full flex items-center justify-between mb-4 px-2">
                     <div class="text-xs text-slate-300 font-semibold flex items-center gap-2">
-                        <i data-lucide="eye" class="w-4 h-4 text-blue-400"></i> Live A4 Print Canvas
+                        <i data-lucide="eye" class="w-4 h-4 text-blue-400"></i> Live International Standard Canvas
                     </div>
-                    <span class="text-[11px] text-slate-500">210mm x 297mm</span>
+                    <span class="text-[11px] text-slate-500">210mm x 297mm (A4)</span>
                 </div>
 
                 <div class="a4-wrapper">
@@ -596,8 +615,115 @@
 
     <script>
         let userPhotoData = null;
+        let isEditingMobile = false;
 
-        function formatBulletPoints(text) {
+        function toggleMobileView() {
+            isEditingMobile = !isEditingMobile;
+            const container = document.getElementById('main-grid-container');
+            const toggleText = document.getElementById('mobile-toggle-text');
+            const toggleIcon = document.getElementById('mobile-toggle-icon');
+
+            if (isEditingMobile) {
+                container.classList.remove('slide-to-preview');
+                container.classList.add('slide-to-edit');
+                toggleText.innerText = "View CV";
+                toggleIcon.setAttribute('data-lucide', 'eye');
+            } else {
+                container.classList.remove('slide-to-edit');
+                container.classList.add('slide-to-preview');
+                toggleText.innerText = "Edit CV";
+                toggleIcon.setAttribute('data-lucide', 'edit-3');
+            }
+            lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        let experiences = [
+            {
+                role: "**Senior Operations Manager**",
+                company: "Apex Corporate Solutions Ltd.",
+                date: "2023 - Present",
+                desc: "• Directed cross-functional teams to streamline daily business operations, reducing operational costs by 20%.\n• Spearheaded strategic partnership initiatives that boosted quarterly revenue growth by 35%.\n• Implemented automated workflow systems and performance metrics tracking for 50+ staff members."
+            },
+            {
+                role: "**Project Coordinator & Business Analyst**",
+                company: "Global Enterprise Network",
+                date: "2021 - 2023",
+                desc: "• Managed end-to-end execution of multi-client corporate projects within strict timelines and budgets.\n• Conducted comprehensive market research and competitor analysis to identify new service expansion areas."
+            }
+        ];
+
+        let educations = [
+            {
+                degree: "Master of Business Administration (MBA) in Marketing & Finance",
+                inst: "Institute of Business Administration (IBA), University of Dhaka",
+                year: "2021 - 2023",
+                cgpa: "3.85 / 4.00"
+            },
+            {
+                degree: "Bachelor of Business Administration (BBA) in Management",
+                inst: "University of Dhaka",
+                year: "2017 - 2021",
+                cgpa: "3.78 / 4.00"
+            }
+        ];
+
+        let trainings = [
+            {
+                title: "Advanced Strategic Management & Leadership",
+                inst: "Corporate Executive Academy",
+                year: "2024",
+                details: "Comprehensive training on enterprise resource planning, agile project management, and high-performance team leadership."
+            },
+            {
+                title: "Project Management Professional (PMP) Workshop",
+                inst: "Project Management Institute (PMI)",
+                year: "2023",
+                details: "Focused on risk management, budgeting, stakeholder engagement, and structured workflow optimization."
+            }
+        ];
+
+        let references = [
+            {
+                name: "Dr. Rafiqul Islam",
+                title: "Professor & Director",
+                company: "IBA, University of Dhaka",
+                email: "rafiqul.islam@du.ac.bd",
+                phone: "+880 1711 123456"
+            },
+            {
+                name: "Anisur Rahman",
+                title: "Managing Director",
+                company: "Apex Corporate Solutions Ltd.",
+                email: "anisur.r@apexcorp.com",
+                phone: "+880 1912 654321"
+            }
+        ];
+
+        function saveToLocalStorage() {
+            const cvData = {
+                theme: document.getElementById('cv-theme-select').value,
+                showPhoto: document.getElementById('cv-show-photo').checked,
+                photo: userPhotoData,
+                name: document.getElementById('cv-name').value,
+                title: document.getElementById('cv-title').value,
+                email: document.getElementById('cv-email').value,
+                phone: document.getElementById('cv-phone').value,
+                location: document.getElementById('cv-location').value,
+                linkedin: document.getElementById('cv-linkedin').value,
+                website: document.getElementById('cv-website').value,
+                summary: document.getElementById('cv-summary').value,
+                skills: document.getElementById('cv-skills').value,
+                languages: document.getElementById('cv-languages').value,
+                experiences: experiences,
+                educations: educations,
+                trainings: trainings,
+                references: references
+            };
+            localStorage.setItem('altra_solve_cv_data', JSON.stringify(cvData));
+        }
+
+        function formatDescription(text) {
             if (!text) return '';
             const lines = text.split('\n');
             let hasBullets = false;
@@ -605,25 +731,42 @@
             const formattedLines = lines.map(line => {
                 const trimmed = line.trim();
                 if (!trimmed) return '';
-                const match = trimmed.match(/^([•\-\*]|\d+[\.\)])\s*(.*)/);
+
+                let processedText = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>');
+
+                const match = processedText.match(/^([•\-\*]|\d+[\.\)])\s*(.*)/);
                 if (match) {
                     hasBullets = true;
                     const bulletChar = match[1].match(/\d/) ? match[1] : '•';
                     const content = match[2];
                     return `<li class="flex items-start gap-1.5 my-0.5">
-                            <span class="inline-block font-bold select-none opacity-80 flex-shrink-0">${bulletChar}</span>
-                            <span class="flex-1 leading-snug">${content}</span>
-                          </li>`;
+                                <span class="inline-block font-bold select-none opacity-80 flex-shrink-0">${bulletChar}</span>
+                                <span class="flex-1 leading-snug">${content}</span>
+                              </li>`;
                 } else {
-                    return `<p class="my-0.5 leading-snug">${trimmed}</p>`;
+                    return `<p class="my-0.5 leading-snug">${processedText}</p>`;
                 }
             });
 
             if (hasBullets) {
                 return `<ul class="space-y-0.5">${formattedLines.join('')}</ul>`;
             } else {
-                return `<p class="whitespace-pre-line leading-relaxed">${text}</p>`;
+                return `<div class="space-y-0.5">${formattedLines.join('')}</div>`;
             }
+        }
+
+        function insertBoldToSummary() {
+            const textarea = document.getElementById('cv-summary');
+            if (!textarea) return;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const val = textarea.value;
+            const selectedText = val.substring(start, end) || 'bold text';
+            textarea.value = val.substring(0, start) + `**${selectedText}**` + val.substring(end);
+            textarea.focus();
+            textarea.selectionStart = start + 2;
+            textarea.selectionEnd = start + 2 + selectedText.length;
+            renderCV();
         }
 
         function insertBulletToSummary() {
@@ -639,6 +782,20 @@
             renderCV();
         }
 
+        function insertBoldToExp(index) {
+            const textarea = document.getElementById(`exp-desc-${index}`);
+            if (!textarea) return;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const val = textarea.value;
+            const selectedText = val.substring(start, end) || 'bold text';
+            textarea.value = val.substring(0, start) + `**${selectedText}**` + val.substring(end);
+            textarea.focus();
+            textarea.selectionStart = start + 2;
+            textarea.selectionEnd = start + 2 + selectedText.length;
+            updateExperience(index, 'desc', textarea.value);
+        }
+
         function insertBulletToExp(index) {
             const textarea = document.getElementById(`exp-desc-${index}`);
             if (!textarea) return;
@@ -651,68 +808,6 @@
             textarea.selectionStart = textarea.selectionEnd = start + bulletStr.length;
             updateExperience(index, 'desc', textarea.value);
         }
-
-        let experiences = [
-            {
-                role: "Chief Operating Officer & Director",
-                company: "Apex Global Supply Networks Ltd.",
-                date: "2021 - Present",
-                desc: "• Directed end-to-end supply chain strategies across 12 distribution centers, leading a workforce of 250+ personnel.\n• Reduced quarterly operational leakage by 22% ($1.8M saved) through lean automation SOPs."
-            },
-            {
-                role: "Head of Regional Supply Chain",
-                company: "British American Tobacco",
-                date: "2016 - 2021",
-                desc: "• Spearheaded data-driven demand forecasting algorithms resulting in a 35% improvement in inventory turnover.\n• Managed SAP S/4HANA ERP migration for regional logistics hubs."
-            }
-        ];
-
-        let educations = [
-            {
-                degree: "Master of Business Administration (MBA) in Operations",
-                inst: "Institute of Business Administration (IBA), University of Dhaka",
-                year: "2014 - 2016",
-                cgpa: "3.85 / 4.00"
-            },
-            {
-                degree: "B.Sc. in Industrial & Production Engineering",
-                inst: "Bangladesh University of Engineering and Technology (BUET)",
-                year: "2010 - 2014",
-                cgpa: "3.78 / 4.00"
-            }
-        ];
-
-        let trainings = [
-            {
-                title: "Certified Supply Chain Professional (CSCP)",
-                inst: "APICS / Association for Supply Chain Management",
-                year: "2020",
-                details: "Comprehensive strategic supply chain design, risk mitigation, and global logistics framework."
-            },
-            {
-                title: "Lean Six Sigma Black Belt (LSSBB)",
-                inst: "Kepner-Tregoe & Lean Institute",
-                year: "2018",
-                details: "Advanced process improvement, DMAIC methodologies, and statistical quality control."
-            }
-        ];
-
-        let references = [
-            {
-                name: "Prof. Dr. Mahbubur Rahman",
-                title: "Senior Professor, Dept. of IPE",
-                company: "BUET",
-                email: "m.rahman@buet.ac.bd",
-                phone: "+880 1819 000000"
-            },
-            {
-                name: "Syed Al-Mansur",
-                title: "Managing Director",
-                company: "Apex Logistics International",
-                email: "mansur@apexglobal.com",
-                phone: "+880 1711 999888"
-            }
-        ];
 
         function handlePhotoUpload(event) {
             const file = event.target.files[0];
@@ -730,28 +825,33 @@
         function renderExperienceForm() {
             const container = document.getElementById('experience-container');
             container.innerHTML = experiences.map((exp, index) => `
-                        <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2 relative">
-                          <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                            <span class="text-[11px] font-bold text-blue-400">Experience #${index + 1}</span>
-                            <button type="button" onclick="removeExperience(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                            </button>
-                          </div>
-                          <div class="grid grid-cols-2 gap-2">
-                            <input type="text" value="${exp.role || ''}" oninput="updateExperience(${index}, 'role', this.value)" placeholder="Role / Position" class="input-field">
-                            <input type="text" value="${exp.company || ''}" oninput="updateExperience(${index}, 'company', this.value)" placeholder="Company / Organization" class="input-field">
-                          </div>
-                          <input type="text" value="${exp.date || ''}" oninput="updateExperience(${index}, 'date', this.value)" placeholder="Duration (e.g., 2021 - Present)" class="input-field">
+                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2 relative">
+                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                    <span class="text-[11px] font-bold text-blue-400">Project / Experience #${index + 1}</span>
+                    <button type="button" onclick="removeExperience(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="text" value="${exp.role || ''}" oninput="updateExperience(${index}, 'role', this.value)" placeholder="Project Name or Role" class="input-field">
+                    <input type="text" value="${exp.company || ''}" oninput="updateExperience(${index}, 'company', this.value)" placeholder="Organization / Context" class="input-field">
+                  </div>
+                  <input type="text" value="${exp.date || ''}" oninput="updateExperience(${index}, 'date', this.value)" placeholder="Duration (e.g., 2026)" class="input-field">
 
-                          <div class="flex justify-between items-center pt-1">
-                            <label class="text-[10px] font-bold text-slate-300">Responsibilities & Accomplishments</label>
-                            <button type="button" onclick="insertBulletToExp(${index})" class="text-[10px] bg-slate-950 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2 py-0.5 rounded flex items-center gap-1 font-semibold transition">
-                              <i data-lucide="list" class="w-3 h-3"></i> + Add Bullet Point (•)
-                            </button>
-                          </div>
-                          <textarea id="exp-desc-${index}" rows="3" oninput="updateExperience(${index}, 'desc', this.value)" placeholder="Key Responsibilities & Achievements..." class="input-field">${exp.desc || ''}</textarea>
-                        </div>
-                      `).join('');
+                  <div class="flex justify-between items-center pt-1">
+                    <label class="text-[10px] font-bold text-slate-300">Project Work / Description</label>
+                    <div class="flex gap-1.5">
+                        <button type="button" onclick="insertBoldToExp(${index})" class="text-[10px] bg-slate-950 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2 py-0.5 rounded font-bold transition" title="Make selected text bold">
+                            <b>B</b>
+                        </button>
+                        <button type="button" onclick="insertBulletToExp(${index})" class="text-[10px] bg-slate-950 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2 py-0.5 rounded flex items-center gap-1 font-semibold transition">
+                            <i data-lucide="list" class="w-3 h-3"></i> + Bullet
+                        </button>
+                    </div>
+                  </div>
+                  <textarea id="exp-desc-${index}" rows="3" oninput="updateExperience(${index}, 'desc', this.value)" placeholder="Describe project features, tech stack, and achievements..." class="input-field">${exp.desc || ''}</textarea>
+                </div>
+            `).join('');
             lucide.createIcons();
         }
 
@@ -775,21 +875,21 @@
         function renderEducationForm() {
             const container = document.getElementById('education-container');
             container.innerHTML = educations.map((edu, index) => `
-                        <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
-                          <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                            <span class="text-[11px] font-bold text-blue-400">Education #${index + 1}</span>
-                            <button type="button" onclick="removeEducation(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                            </button>
-                          </div>
-                          <input type="text" value="${edu.degree || ''}" oninput="updateEducation(${index}, 'degree', this.value)" placeholder="Degree Name" class="input-field">
-                          <input type="text" value="${edu.inst || ''}" oninput="updateEducation(${index}, 'inst', this.value)" placeholder="Institution" class="input-field">
-                          <div class="grid grid-cols-2 gap-2">
-                            <input type="text" value="${edu.year || ''}" oninput="updateEducation(${index}, 'year', this.value)" placeholder="Year / Duration" class="input-field">
-                            <input type="text" value="${edu.cgpa || ''}" oninput="updateEducation(${index}, 'cgpa', this.value)" placeholder="CGPA / Result" class="input-field">
-                          </div>
-                        </div>
-                      `).join('');
+                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
+                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                    <span class="text-[11px] font-bold text-blue-400">Education #${index + 1}</span>
+                    <button type="button" onclick="removeEducation(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                    </button>
+                  </div>
+                  <input type="text" value="${edu.degree || ''}" oninput="updateEducation(${index}, 'degree', this.value)" placeholder="Degree Name" class="input-field">
+                  <input type="text" value="${edu.inst || ''}" oninput="updateEducation(${index}, 'inst', this.value)" placeholder="Institution" class="input-field">
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="text" value="${edu.year || ''}" oninput="updateEducation(${index}, 'year', this.value)" placeholder="Year / Duration" class="input-field">
+                    <input type="text" value="${edu.cgpa || ''}" oninput="updateEducation(${index}, 'cgpa', this.value)" placeholder="CGPA / Result" class="input-field">
+                  </div>
+                </div>
+            `).join('');
             lucide.createIcons();
         }
 
@@ -813,21 +913,21 @@
         function renderTrainingForm() {
             const container = document.getElementById('training-container');
             container.innerHTML = trainings.map((t, index) => `
-                        <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
-                          <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                            <span class="text-[11px] font-bold text-blue-400">Training #${index + 1}</span>
-                            <button type="button" onclick="removeTraining(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                            </button>
-                          </div>
-                          <input type="text" value="${t.title || ''}" oninput="updateTraining(${index}, 'title', this.value)" placeholder="Course / Workshop Title" class="input-field">
-                          <div class="grid grid-cols-2 gap-2">
-                            <input type="text" value="${t.inst || ''}" oninput="updateTraining(${index}, 'inst', this.value)" placeholder="Institution / Vendor" class="input-field">
-                            <input type="text" value="${t.year || ''}" oninput="updateTraining(${index}, 'year', this.value)" placeholder="Year" class="input-field">
-                          </div>
-                          <input type="text" value="${t.details || ''}" oninput="updateTraining(${index}, 'details', this.value)" placeholder="Brief Scope / Modules covered" class="input-field">
-                        </div>
-                      `).join('');
+                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
+                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                    <span class="text-[11px] font-bold text-blue-400">Training #${index + 1}</span>
+                    <button type="button" onclick="removeTraining(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                    </button>
+                  </div>
+                  <input type="text" value="${t.title || ''}" oninput="updateTraining(${index}, 'title', this.value)" placeholder="Course / Workshop Title" class="input-field">
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="text" value="${t.inst || ''}" oninput="updateTraining(${index}, 'inst', this.value)" placeholder="Institution / Vendor" class="input-field">
+                    <input type="text" value="${t.year || ''}" oninput="updateTraining(${index}, 'year', this.value)" placeholder="Year" class="input-field">
+                  </div>
+                  <input type="text" value="${t.details || ''}" oninput="updateTraining(${index}, 'details', this.value)" placeholder="Brief Scope / Modules covered" class="input-field">
+                </div>
+            `).join('');
             lucide.createIcons();
         }
 
@@ -851,24 +951,24 @@
         function renderReferenceForm() {
             const container = document.getElementById('reference-container');
             container.innerHTML = references.map((ref, index) => `
-                        <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
-                          <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                            <span class="text-[11px] font-bold text-blue-400">Reference #${index + 1}</span>
-                            <button type="button" onclick="removeReference(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                            </button>
-                          </div>
-                          <div class="grid grid-cols-2 gap-2">
-                            <input type="text" value="${ref.name || ''}" oninput="updateReference(${index}, 'name', this.value)" placeholder="Referee Name" class="input-field">
-                            <input type="text" value="${ref.title || ''}" oninput="updateReference(${index}, 'title', this.value)" placeholder="Designation" class="input-field">
-                          </div>
-                          <div class="grid grid-cols-3 gap-2">
-                            <input type="text" value="${ref.company || ''}" oninput="updateReference(${index}, 'company', this.value)" placeholder="Organization" class="input-field">
-                            <input type="email" value="${ref.email || ''}" oninput="updateReference(${index}, 'email', this.value)" placeholder="Email" class="input-field">
-                            <input type="text" value="${ref.phone || ''}" oninput="updateReference(${index}, 'phone', this.value)" placeholder="Phone" class="input-field">
-                          </div>
-                        </div>
-                      `).join('');
+                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
+                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                    <span class="text-[11px] font-bold text-blue-400">Reference #${index + 1}</span>
+                    <button type="button" onclick="removeReference(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="text" value="${ref.name || ''}" oninput="updateReference(${index}, 'name', this.value)" placeholder="Referee Name" class="input-field">
+                    <input type="text" value="${ref.title || ''}" oninput="updateReference(${index}, 'title', this.value)" placeholder="Designation" class="input-field">
+                  </div>
+                  <div class="grid grid-cols-3 gap-2">
+                    <input type="text" value="${ref.company || ''}" oninput="updateReference(${index}, 'company', this.value)" placeholder="Organization" class="input-field">
+                    <input type="email" value="${ref.email || ''}" oninput="updateReference(${index}, 'email', this.value)" placeholder="Email" class="input-field">
+                    <input type="text" value="${ref.phone || ''}" oninput="updateReference(${index}, 'phone', this.value)" placeholder="Phone" class="input-field">
+                  </div>
+                </div>
+            `).join('');
             lucide.createIcons();
         }
 
@@ -889,7 +989,6 @@
             renderCV();
         }
 
-        /* MAIN RENDER FUNCTION SUPPORTING ALL 10 THEMES DYNAMICALLY */
         function renderCV() {
             const theme = document.getElementById('cv-theme-select').value;
             const showPhoto = document.getElementById('cv-show-photo').checked;
@@ -913,7 +1012,6 @@
 
             const container = document.getElementById('cv-render-area');
 
-            // Contact details generator helper
             const contactItems = [];
             if (data.email) contactItems.push(`<span>📧 ${data.email}</span>`);
             if (data.phone) contactItems.push(`<span>📞 ${data.phone}</span>`);
@@ -922,176 +1020,245 @@
             if (data.website) contactItems.push(`<span>🌐 ${data.website}</span>`);
             const contactBlockHtml = contactItems.join(' ');
 
-            // Filtering entries to verify meaningful content exists before rendering headers
             const validExperiences = experiences.filter(exp => (exp.role && exp.role.trim()) || (exp.company && exp.company.trim()) || (exp.desc && exp.desc.trim()));
             const validEducations = educations.filter(edu => (edu.degree && edu.degree.trim()) || (edu.inst && edu.inst.trim()));
             const validTrainings = trainings.filter(t => (t.title && t.title.trim()) || (t.inst && t.inst.trim()));
             const validReferences = references.filter(r => (r.name && r.name.trim()) || (r.title && r.title.trim()) || (r.company && r.company.trim()));
 
-            // Common Sections Blocks
             const expBlock = validExperiences.length ? `
-                        <div class="mb-4 cv-section-block">
-                          <h2 class="section-title">Work Experience</h2>
-                          <div class="space-y-3">
-                            ${validExperiences.map(exp => `
-                              <div class="cv-section-block">
-                                <div class="flex justify-between items-baseline">
-                                  <h3 class="font-bold text-slate-800 text-xs">${exp.role || ''} ${exp.company ? `<span class="font-semibold text-blue-700">| ${exp.company}</span>` : ''}</h3>
-                                  <span class="text-[10px] font-bold text-slate-500">${exp.date || ''}</span>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mt-1">${formatBulletPoints(exp.desc)}</div>
-                              </div>
-                            `).join('')}
-                          </div>
-                        </div>` : '';
+                <div class="mb-3 cv-section-block">
+                  <h2 class="section-title">Professional Experience & Projects</h2>
+                  <div class="space-y-2.5">
+                    ${validExperiences.map(exp => `
+                      <div class="cv-item-block">
+                        <div class="flex justify-between items-baseline">
+                          <h3 class="font-bold text-slate-900 text-xs">${exp.role.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>')} ${exp.company ? `<span class="font-semibold text-blue-700">| ${exp.company}</span>` : ''}</h3>
+                          <span class="text-[10px] font-bold text-slate-500">${exp.date || ''}</span>
+                        </div>
+                        <div class="text-[11px] text-slate-700 mt-0.5">${formatDescription(exp.desc)}</div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>` : '';
 
             const eduBlock = validEducations.length ? `
-                        <div class="mb-4 cv-section-block">
-                          <h2 class="section-title">Academic Qualifications</h2>
-                          <div class="space-y-2">
-                            ${validEducations.map(edu => `
-                              <div class="flex justify-between items-baseline cv-section-block">
-                                <div>
-                                  <h3 class="font-bold text-slate-800 text-xs">${edu.degree || ''} ${edu.cgpa ? `<span class="font-normal text-slate-600">(CGPA: ${edu.cgpa})</span>` : ''}</h3>
-                                  <p class="text-[11px] text-slate-500">${edu.inst || ''}</p>
-                                </div>
-                                <span class="text-[10px] font-semibold text-slate-500">${edu.year || ''}</span>
-                              </div>
-                            `).join('')}
-                          </div>
-                        </div>` : '';
+                <div class="mb-3 cv-section-block">
+                  <h2 class="section-title">Academic Qualifications</h2>
+                  <div class="space-y-2">
+                    ${validEducations.map(edu => `
+                      <div class="flex justify-between items-baseline cv-item-block">
+                        <div>
+                          <h3 class="font-bold text-slate-900 text-xs">${edu.degree || ''} ${edu.cgpa ? `<span class="font-normal text-slate-650">(CGPA: ${edu.cgpa})</span>` : ''}</h3>
+                          <p class="text-[11px] text-slate-600">${edu.inst || ''}</p>
+                        </div>
+                        <span class="text-[10px] font-semibold text-slate-500">${edu.year || ''}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>` : '';
 
             const trainBlock = validTrainings.length ? `
-                        <div class="mb-4 cv-section-block">
-                          <h2 class="section-title">Trainings & Certifications</h2>
-                          <div class="space-y-2">
-                            ${validTrainings.map(t => `
-                              <div class="flex justify-between items-baseline cv-section-block">
-                                <div>
-                                  <h3 class="font-bold text-slate-800 text-xs">${t.title || ''} ${t.inst ? `<span class="font-normal text-slate-500">— ${t.inst}</span>` : ''}</h3>
-                                  <p class="text-[10px] text-slate-600">${t.details || ''}</p>
-                                </div>
-                                <span class="text-[10px] font-semibold">${t.year || ''}</span>
-                              </div>
-                            `).join('')}
-                          </div>
-                        </div>` : '';
+                <div class="mb-3 cv-section-block">
+                  <h2 class="section-title">Trainings & Certifications</h2>
+                  <div class="space-y-2">
+                    ${validTrainings.map(t => `
+                      <div class="flex justify-between items-baseline cv-item-block">
+                        <div>
+                          <h3 class="font-bold text-slate-900 text-xs">${t.title || ''} ${t.inst ? `<span class="font-normal text-slate-650">— ${t.inst}</span>` : ''}</h3>
+                          <p class="text-[10px] text-slate-600">${t.details || ''}</p>
+                        </div>
+                        <span class="text-[10px] font-semibold text-slate-500">${t.year || ''}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>` : '';
 
             const refBlock = validReferences.length ? `
-                        <div class="cv-section-block">
-                          <h2 class="section-title">References</h2>
-                          <div class="grid grid-cols-2 gap-4 text-xs">
-                            ${validReferences.map(r => `
-                              <div class="cv-section-block">
-                                <p class="font-bold text-slate-800">${r.name || ''}</p>
-                                <p class="text-[11px] text-slate-600">${r.title || ''}${r.title && r.company ? ', ' : ''}${r.company || ''}</p>
-                                <p class="text-[10px] text-slate-500">${[r.email, r.phone].filter(Boolean).join(' | ')}</p>
-                              </div>
-                            `).join('')}
-                          </div>
-                        </div>` : '';
+                <div class="cv-section-block">
+                  <h2 class="section-title">Professional References</h2>
+                  <div class="grid grid-cols-2 gap-4 text-xs">
+                    ${validReferences.map(r => `
+                      <div class="cv-item-block">
+                        <p class="font-bold text-slate-900">${r.name || ''}</p>
+                        <p class="text-[11px] text-slate-700">${r.title || ''}${r.title && r.company ? ', ' : ''}${r.company || ''}</p>
+                        <p class="text-[10px] text-slate-500 mt-0.5">${[r.email, r.phone].filter(Boolean).join(' | ')}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>` : '';
 
             const skillsBlock = data.skills.length ? `
-                        <div class="mb-4 cv-section-block">
-                          <h2 class="section-title">Core Competencies</h2>
-                          <div class="flex flex-wrap gap-1.5">
-                            ${data.skills.map(s => `<span class="bg-slate-100 border text-slate-800 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
-                          </div>
-                        </div>` : '';
+                <div class="mb-3 cv-section-block">
+                  <h2 class="section-title">Core Competencies</h2>
+                  <div class="flex flex-wrap gap-1.5 mt-1">
+                    ${data.skills.map(s => `<span class="bg-slate-100 border border-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
+                  </div>
+                </div>` : '';
 
-            // Rendering Layouts according to Theme selection
             if (theme === 'theme-3') {
-                // 2-Column Sidebar Layout
                 container.innerHTML = `
-                          <div class="a4-page cv-theme-3">
-                            <div class="sidebar">
-                              ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-28 h-32 object-cover rounded mb-4 mx-auto border-2 border-slate-700">` : ''}
-                              ${data.name ? `<h1 class="text-lg font-bold text-white mb-1">${data.name}</h1>` : ''}
-                              ${data.title ? `<p class="text-xs text-sky-400 mb-4">${data.title}</p>` : ''}
+                  <div class="a4-page cv-theme-3">
+                    <div class="sidebar">
+                      ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-28 h-32 object-cover rounded mb-4 mx-auto border-2 border-slate-600">` : ''}
+                      ${data.name ? `<h1 class="text-base font-bold text-white mb-1">${data.name}</h1>` : ''}
+                      ${data.title ? `<p class="text-[11px] text-sky-400 mb-4">${data.title}</p>` : ''}
 
-                              <div class="space-y-3 text-[11px] text-slate-300">
-                                ${data.email ? `<p>📧 ${data.email}</p>` : ''}
-                                ${data.phone ? `<p>📞 ${data.phone}</p>` : ''}
-                                ${data.location ? `<p>📍 ${data.location}</p>` : ''}
-                                ${data.linkedin ? `<p>🔗 ${data.linkedin}</p>` : ''}
-                                ${data.website ? `<p>🌐 ${data.website}</p>` : ''}
-                              </div>
+                      <div class="space-y-2.5 text-[10px] text-slate-300">
+                        ${data.email ? `<p class="break-words">📧 ${data.email}</p>` : ''}
+                        ${data.phone ? `<p>📞 ${data.phone}</p>` : ''}
+                        ${data.location ? `<p>📍 ${data.location}</p>` : ''}
+                        ${data.linkedin ? `<p class="break-words">🔗 ${data.linkedin}</p>` : ''}
+                        ${data.website ? `<p class="break-words">🌐 ${data.website}</p>` : ''}
+                      </div>
 
-                              ${data.skills.length ? `
-                              <div class="mt-6 cv-section-block">
-                                <h2 class="section-title">Core Skills</h2>
-                                <div class="flex flex-wrap gap-1 mt-2">
-                                  ${data.skills.map(s => `<span class="bg-slate-800 text-sky-300 text-[10px] px-2 py-0.5 rounded border border-slate-700">${s}</span>`).join('')}
-                                </div>
-                              </div>` : ''}
+                      ${data.skills.length ? `
+                      <div class="mt-5 cv-section-block">
+                        <h2 class="section-title">Core Skills</h2>
+                        <div class="flex flex-wrap gap-1 mt-1.5">
+                          ${data.skills.map(s => `<span class="bg-slate-800 text-sky-300 text-[10px] px-2 py-0.5 rounded border border-slate-700">${s}</span>`).join('')}
+                        </div>
+                      </div>` : ''}
 
-                              ${data.languages ? `
-                              <div class="mt-6 cv-section-block">
-                                <h2 class="section-title">Languages</h2>
-                                <p class="text-[11px] text-slate-300 mt-1">${data.languages}</p>
-                              </div>` : ''}
-                            </div>
+                      ${data.languages ? `
+                      <div class="mt-5 cv-section-block">
+                        <h2 class="section-title">Languages</h2>
+                        <p class="text-[10px] text-slate-300 mt-1">${data.languages}</p>
+                      </div>` : ''}
+                    </div>
 
-                            <div class="main-content">
-                              ${data.summary ? `<div class="mb-4 cv-section-block"><h2 class="section-title">Executive Summary</h2><div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div></div>` : ''}
-                              ${expBlock}
-                              ${eduBlock}
-                              ${trainBlock}
-                              ${refBlock}
-                            </div>
-                          </div>`;
-            }
-            else if (theme === 'theme-7') {
-                // Dark Banner Layout
+                    <div class="main-content">
+                      ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Executive Summary</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                      ${expBlock}
+                      ${eduBlock}
+                      ${trainBlock}
+                      ${refBlock}
+                    </div>
+                  </div>`;
+            } else if (theme === 'theme-4') {
                 container.innerHTML = `
-                          <div class="a4-page cv-theme-7">
-                            <div class="banner flex justify-between items-center">
-                              <div>
-                                ${data.name ? `<h1 class="text-2xl font-bold">${data.name}</h1>` : ''}
-                                ${data.title ? `<p class="text-indigo-200 text-xs mt-1 font-medium">${data.title}</p>` : ''}
-                                ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[11px] text-indigo-100 mt-3">${contactBlockHtml}</div>` : ''}
-                              </div>
-                              ${photoHtml}
-                            </div>
-                            ${data.summary ? `<div class="mb-4 cv-section-block"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700">${formatBulletPoints(data.summary)}</div></div>` : ''}
-                            ${expBlock}
-                            ${eduBlock}
-                            ${data.skills.length ? `<div class="mb-4 cv-section-block"><h2 class="section-title">Skills</h2><p class="text-xs text-slate-700">${data.skills.join(' • ')}</p></div>` : ''}
-                            ${trainBlock}
-                            ${refBlock}
-                          </div>`;
-            }
-            else {
-                // Single Column Layout for Themes 1, 2, 4, 5, 6, 8, 9, 10 with distinct CSS class
+                  <div class="a4-page cv-theme-4">
+                    <div class="text-center border-b pb-3 mb-3 cv-section-block">
+                      ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-20 h-24 object-cover rounded-full mx-auto mb-2 border border-slate-400">` : ''}
+                      ${data.name ? `<h1 class="text-2xl font-bold">${data.name}</h1>` : ''}
+                      ${data.title ? `<p class="text-xs font-semibold italic text-slate-700 mt-0.5">${data.title}</p>` : ''}
+                      ${contactBlockHtml ? `<div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                    </div>
+                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Professional Summary</h2><div class="text-xs text-slate-800 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                    ${expBlock}
+                    ${eduBlock}
+                    ${skillsBlock}
+                    ${trainBlock}
+                    ${refBlock}
+                  </div>`;
+            } else if (theme === 'theme-5') {
+                container.innerHTML = `
+                  <div class="a4-page cv-theme-5">
+                    <div class="flex justify-between items-center border-b-2 border-teal-600 pb-3 mb-3 cv-section-block">
+                      <div>
+                        ${data.name ? `<h1 class="text-2xl font-black text-teal-900">${data.name}</h1>` : ''}
+                        ${data.title ? `<p class="font-bold text-xs text-teal-700 mt-0.5">${data.title}</p>` : ''}
+                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                      </div>
+                      ${photoHtml}
+                    </div>
+                    <div class="grid grid-cols-12 gap-4">
+                      <div class="col-span-8">
+                        ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Overview</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                        ${expBlock}
+                      </div>
+                      <div class="col-span-4 space-y-3">
+                        ${skillsBlock}
+                        ${eduBlock}
+                        ${trainBlock}
+                      </div>
+                    </div>
+                    ${refBlock}
+                  </div>`;
+            } else if (theme === 'theme-6') {
+                container.innerHTML = `
+                  <div class="a4-page cv-theme-6">
+                    <div class="header-card flex justify-between items-center">
+                      <div>
+                        ${data.name ? `<h1 class="text-xl font-extrabold text-slate-800">${data.name}</h1>` : ''}
+                        ${data.title ? `<p class="text-xs font-bold text-slate-600 mt-0.5">${data.title}</p>` : ''}
+                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-x-3 text-[10px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                      </div>
+                      ${photoHtml}
+                    </div>
+                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                    ${expBlock}
+                    ${eduBlock}
+                    ${skillsBlock}
+                    ${trainBlock}
+                    ${refBlock}
+                  </div>`;
+            } else if (theme === 'theme-7') {
+                container.innerHTML = `
+                  <div class="a4-page cv-theme-7">
+                    <div class="banner flex justify-between items-center">
+                      <div>
+                        ${data.name ? `<h1 class="text-2xl font-bold">${data.name}</h1>` : ''}
+                        ${data.title ? `<p class="text-indigo-200 text-xs mt-1 font-medium">${data.title}</p>` : ''}
+                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[11px] text-indigo-100 mt-3">${contactBlockHtml}</div>` : ''}
+                      </div>
+                      ${photoHtml}
+                    </div>
+                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                    ${expBlock}
+                    ${eduBlock}
+                    ${skillsBlock}
+                    ${trainBlock}
+                    ${refBlock}
+                  </div>`;
+            } else if (theme === 'theme-9') {
+                container.innerHTML = `
+                  <div class="a4-page cv-theme-9">
+                    <div class="border-b-2 border-black pb-3 mb-3 flex justify-between items-center cv-section-block">
+                      <div>
+                        ${data.name ? `<h1 class="text-2xl font-black text-black">${data.name}</h1>` : ''}
+                        ${data.title ? `<p class="text-xs font-semibold text-zinc-700 mt-0.5">${data.title}</p>` : ''}
+                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[10px] text-zinc-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                      </div>
+                      ${photoHtml}
+                    </div>
+                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Summary</h2><div class="text-xs text-zinc-800 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                    ${expBlock}
+                    ${eduBlock}
+                    ${skillsBlock}
+                    ${trainBlock}
+                    ${refBlock}
+                  </div>`;
+            } else {
                 const themeClass = `cv-${theme}`;
                 const hasHeader = data.name || data.title || contactBlockHtml || photoHtml;
                 container.innerHTML = `
-                          <div class="a4-page ${themeClass}">
-                            ${hasHeader ? `
-                            <div class="border-b pb-4 mb-4 flex justify-between items-center gap-4 cv-section-block">
-                              <div>
-                                ${data.name ? `<h1 class="text-2xl font-bold text-slate-900">${data.name}</h1>` : ''}
-                                ${data.title ? `<p class="font-semibold text-xs mt-0.5 text-slate-600">${data.title}</p>` : ''}
-                                ${contactBlockHtml ? `<div class="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-slate-600 mt-2">${contactBlockHtml}</div>` : ''}
-                              </div>
-                              ${photoHtml}
-                            </div>` : ''}
+                  <div class="a4-page ${themeClass}">
+                    ${hasHeader ? `
+                    <div class="border-b pb-3 mb-3 flex justify-between items-center gap-4 cv-section-block">
+                      <div>
+                        ${data.name ? `<h1 class="text-2xl font-bold text-slate-900">${data.name}</h1>` : ''}
+                        ${data.title ? `<p class="font-semibold text-xs mt-0.5 text-slate-600">${data.title}</p>` : ''}
+                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                      </div>
+                      ${photoHtml}
+                    </div>` : ''}
 
-                            ${data.summary ? `
-                            <div class="mb-4 cv-section-block">
-                              <h2 class="section-title">Executive Profile</h2>
-                              <div class="text-xs text-slate-700 mt-1">${formatBulletPoints(data.summary)}</div>
-                            </div>` : ''}
+                    ${data.summary ? `
+                    <div class="mb-3 cv-section-block">
+                      <h2 class="section-title">Executive Profile</h2>
+                      <div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div>
+                    </div>` : ''}
 
-                            ${expBlock}
-                            ${eduBlock}
-                            ${skillsBlock}
-                            ${trainBlock}
-                            ${refBlock}
-                          </div>`;
+                    ${expBlock}
+                    ${eduBlock}
+                    ${skillsBlock}
+                    ${trainBlock}
+                    ${refBlock}
+                  </div>`;
             }
 
             lucide.createIcons();
+            saveToLocalStorage();
         }
 
         function showToast(message) {
@@ -1114,12 +1281,12 @@
             const name = document.getElementById('cv-name').value || 'Professional_CV';
 
             const opt = {
-                margin: [10, 0, 10, 0],
+                margin: [5, 0, 5, 0],
                 filename: `${name.trim().replace(/\s+/g, '_')}_CV.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['css', 'legacy'], avoid: ['.cv-section-block', '.section-title'] }
+                pagebreak: { mode: ['css', 'legacy'], avoid: ['.cv-section-block', '.cv-item-block', '.section-title'] }
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
@@ -1130,6 +1297,39 @@
         }
 
         window.onload = () => {
+            const savedData = localStorage.getItem('altra_solve_cv_data');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+
+                    if (data.theme) document.getElementById('cv-theme-select').value = data.theme;
+                    if (data.showPhoto !== undefined) document.getElementById('cv-show-photo').checked = data.showPhoto;
+
+                    if (data.photo) {
+                        userPhotoData = data.photo;
+                        document.getElementById('photo-preview-box').innerHTML = `<img src="${userPhotoData}" class="w-full h-full object-cover">`;
+                    }
+
+                    if (data.name !== undefined) document.getElementById('cv-name').value = data.name;
+                    if (data.title !== undefined) document.getElementById('cv-title').value = data.title;
+                    if (data.email !== undefined) document.getElementById('cv-email').value = data.email;
+                    if (data.phone !== undefined) document.getElementById('cv-phone').value = data.phone;
+                    if (data.location !== undefined) document.getElementById('cv-location').value = data.location;
+                    if (data.linkedin !== undefined) document.getElementById('cv-linkedin').value = data.linkedin;
+                    if (data.website !== undefined) document.getElementById('cv-website').value, document.getElementById('cv-website').value = data.website;
+                    if (data.summary !== undefined) document.getElementById('cv-summary').value = data.summary;
+                    if (data.skills !== undefined) document.getElementById('cv-skills').value = data.skills;
+                    if (data.languages !== undefined) document.getElementById('cv-languages').value = data.languages;
+
+                    if (data.experiences) experiences = data.experiences;
+                    if (data.educations) educations = data.educations;
+                    if (data.trainings) trainings = data.trainings;
+                    if (data.references) references = data.references;
+                } catch (e) {
+                    console.error("Error loading saved data from localStorage", e);
+                }
+            }
+
             renderExperienceForm();
             renderEducationForm();
             renderTrainingForm();
