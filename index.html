@@ -20,6 +20,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #0f172a;
             color: #f8fafc;
+            overflow-x: hidden;
         }
 
         .a4-wrapper {
@@ -32,7 +33,7 @@
 
         .a4-page {
             width: 210mm;
-            min-height: 297mm;
+            min-height: 296mm;
             padding: 12mm 14mm;
             margin: 0 auto;
             background: #ffffff;
@@ -66,22 +67,6 @@
         .cv-item-block li {
             break-inside: avoid !important;
             page-break-inside: avoid !important;
-        }
-
-        @media (max-width: 768px) {
-            .a4-page {
-                transform: scale(0.42);
-                transform-origin: top center;
-                margin-bottom: -160mm;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .a4-page {
-                transform: scale(0.75);
-                transform-origin: top center;
-                margin-bottom: -70mm;
-            }
         }
 
         @media print {
@@ -141,7 +126,7 @@
                 background: #0f172a;
                 color: #ffffff;
                 padding: 12mm 8mm;
-                min-height: 297mm;
+                min-height: 296mm;
                 box-sizing: border-box;
             }
 
@@ -313,7 +298,7 @@
                 outline: 2px solid rgba(37, 99, 235, 0.2);
             }
 
-        /* Mobile Slide Transition Styles */
+        /* ===== Mobile Slide Transition Styles ===== */
         @media (max-width: 1023px) {
             .mobile-slide-container {
                 position: relative;
@@ -353,70 +338,113 @@
                 position: relative;
                 pointer-events: auto;
             }
+
+            /* ✅ Mobile form usability: bigger tap targets, no iOS auto-zoom */
+            #edit-panel .input-field {
+                font-size: 16px;
+                padding: 0.65rem 0.75rem;
+                border-radius: 0.5rem;
+            }
+
+            #edit-panel label {
+                font-size: 0.72rem !important;
+                letter-spacing: 0.02em;
+            }
+
+            #edit-panel summary {
+                padding: 1rem 0.9rem !important;
+                font-size: 0.8rem !important;
+            }
+
+            #edit-panel textarea.input-field {
+                font-size: 16px;
+                line-height: 1.55;
+            }
+
+            #edit-panel input,
+            #edit-panel textarea,
+            #edit-panel select {
+                -webkit-appearance: none;
+                appearance: none;
+            }
+
+            #edit-panel select {
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 0.6rem center;
+                background-size: 1rem;
+                padding-right: 2.2rem;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-900 text-slate-100">
 
-    <section class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 border-b border-indigo-900/50 py-6 px-4 no-print">
-        <div class="max-w-[1400px] mx-auto flex flex-col items-center text-center space-y-4">
+    <section class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 border-b border-indigo-900/50 py-5 md:py-6 px-4 no-print">
+        <div class="max-w-[1400px] mx-auto flex flex-col items-center text-center space-y-3 md:space-y-4">
             <a href="https://altrasolve.com" target="_blank" rel="noopener noreferrer" class="inline-block transition transform hover:scale-105">
-                <div class="text-2xl font-black text-blue-500 tracking-wider">ALTRA SOLVE</div>
+                <div class="text-xl md:text-2xl font-black text-blue-500 tracking-wider">ALTRA SOLVE</div>
             </a>
-            <span class="inline-block bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-widest">
+            <span class="inline-block bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[10px] md:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                 CUSTOM SOFTWARE DEVELOPMENT
             </span>
-            <h2 class="text-xl md:text-3xl font-extrabold text-white max-w-3xl leading-tight">
+            <h2 class="text-lg md:text-3xl font-extrabold text-white max-w-3xl leading-tight">
                 International Standard ProCV Engine
             </h2>
-            <p class="text-xs md:text-sm text-slate-300 max-w-2xl leading-relaxed">
+            <p class="text-[11px] md:text-sm text-slate-300 max-w-2xl leading-relaxed">
                 Build global ATS-compliant professional resumes instantly with 10 distinct architectural layouts.
             </p>
         </div>
     </section>
 
-    <div id="toast" class="fixed bottom-5 right-5 bg-emerald-600 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
+    <div id="toast" class="fixed bottom-5 right-5 left-5 sm:left-auto bg-emerald-600 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
         <i data-lucide="check-circle" class="w-5 h-5"></i>
         <span id="toast-message">CV Downloading Started...</span>
     </div>
 
     <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-40 shadow-lg no-print">
-        <div class="max-w-[1700px] mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 pt-1">
-                <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 p-2 rounded-xl shadow-md">
-                    <i data-lucide="file-badge-2" class="w-6 h-6 text-white"></i>
+        <div class="max-w-[1700px] mx-auto px-3 md:px-4 h-16 flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-2 md:space-x-3 pt-1 min-w-0">
+                <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 p-2 rounded-xl shadow-md flex-shrink-0">
+                    <i data-lucide="file-badge-2" class="w-5 h-5 md:w-6 md:h-6 text-white"></i>
                 </div>
-                <div>
-                    <h1 class="font-extrabold text-base md:text-lg text-white leading-tight tracking-wide flex items-center gap-2">
-                        ProCV Studio <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full border border-blue-500/30 font-medium hidden sm:inline-block">10 Unique Global Themes</span>
+                <div class="min-w-0">
+                    <h1 class="font-extrabold text-sm md:text-lg text-white leading-tight tracking-wide flex items-center gap-2">
+                        <span class="truncate">ProCV Studio</span>
+                        <span class="bg-blue-500/20 text-blue-400 text-[10px] px-2 py-0.5 rounded-full border border-blue-500/30 font-medium hidden xl:inline-block whitespace-nowrap">10 Unique Global Themes</span>
                     </h1>
-                    <p class="text-[11px] text-slate-400">Enterprise Resume Suite & PDF Generator</p>
+                    <p class="text-[10px] md:text-[11px] text-slate-400 truncate">Enterprise Resume Suite & PDF Generator</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
-                <!-- Mobile Slide Toggle Button -->
-                <button id="mobile-toggle-btn" onclick="toggleMobileView()" class="lg:hidden bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3.5 py-2.5 rounded-lg flex items-center gap-1.5 shadow-md transition">
+            <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                <button id="mobile-toggle-btn" onclick="toggleMobileView()" class="lg:hidden bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] md:text-xs font-bold px-3 md:px-3.5 py-2.5 rounded-lg flex items-center gap-1.5 shadow-md transition whitespace-nowrap">
                     <i id="mobile-toggle-icon" data-lucide="edit-3" class="w-4 h-4"></i>
                     <span id="mobile-toggle-text">Edit CV</span>
                 </button>
 
-                <button onclick="downloadPDF()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-lg transition transform active:scale-95">
-                    <i data-lucide="download-cloud" class="w-4 h-4"></i> <span class="hidden sm:inline">Export High-Res</span> PDF
+                <button onclick="downloadPDF()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-[11px] md:text-xs font-bold px-3 md:px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-lg transition transform active:scale-95 whitespace-nowrap">
+                    <i data-lucide="download-cloud" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Export High-Res</span>
+                    <span class="sm:hidden">PDF</span>
+                    <span class="hidden sm:inline">PDF</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-[1700px] mx-auto px-4 py-6 flex-grow w-full">
-        <!-- Mobile Slide Wrapper Class (slide-to-preview by default) -->
+    <main class="max-w-[1700px] mx-auto px-3 md:px-4 py-5 md:py-6 flex-grow w-full">
         <div id="main-grid-container" class="mobile-slide-container slide-to-preview grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-            <!-- Edit Forms Panel -->
-            <div id="edit-panel" class="mobile-panel edit-panel lg:col-span-5 bg-slate-950 p-4 md:p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4 max-h-[88vh] overflow-y-auto no-print">
+            <!-- ===================== EDIT PANEL ===================== -->
+            <div id="edit-panel" class="mobile-panel edit-panel lg:col-span-5 bg-slate-950 p-3.5 md:p-5 rounded-2xl border border-slate-800 shadow-xl space-y-4 lg:max-h-[88vh] lg:overflow-y-auto no-print">
 
                 <div class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 space-y-2">
-                    <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                    <label class="block text-[11px] md:text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
                         <i data-lucide="palette" class="w-4 h-4 text-blue-400"></i> Select Unique International Theme
                     </label>
                     <select id="cv-theme-select" onchange="renderCV()" class="w-full p-2.5 text-xs font-semibold border border-slate-700 rounded-lg bg-slate-950 text-slate-100 focus:ring-2 focus:ring-blue-500">
@@ -434,29 +462,40 @@
                 </div>
 
                 <div class="space-y-3">
+                    <!-- ============ PERSONAL DETAILS (UPDATED PHOTO SECTION) ============ -->
                     <details open class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
                             <span class="flex items-center gap-2 text-blue-400"><i data-lucide="user" class="w-4 h-4"></i> Personal Details & Passport Photo</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
-                        <div class="p-4 space-y-3 bg-slate-950 text-slate-200">
-                            <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
+                        <div class="p-3.5 md:p-4 space-y-3 bg-slate-950 text-slate-200">
+
+                            <!-- ✅ UPDATED: মোবাইলে ছবি বড় ও উপরে, বাটন/চেকবক্স নিচে -->
+                            <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-3">
                                 <label class="block text-[11px] font-bold text-slate-300">Passport Size Profile Photo</label>
-                                <div class="flex items-center gap-3">
-                                    <div id="photo-preview-box" class="w-14 h-16 bg-slate-800 border border-slate-700 rounded overflow-hidden flex items-center justify-center text-slate-500">
-                                        <i data-lucide="image" class="w-6 h-6"></i>
+
+                                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3">
+                                    <!-- প্রিভিউ বক্স: মোবাইলে বড়, ডেস্কটপে স্বাভাবিক -->
+                                    <div id="photo-preview-box"
+                                         class="w-32 h-36 sm:w-20 sm:h-24 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden flex items-center justify-center text-slate-500 flex-shrink-0 shadow-inner">
+                                        <i data-lucide="image" class="w-8 h-8"></i>
                                     </div>
-                                    <div class="flex-grow space-y-1.5">
-                                        <input type="file" id="cv-photo-input" accept="image/*" onchange="handlePhotoUpload(event)" class="text-[11px] text-slate-400 file:mr-2 file:py-1 file:px-2.5 file:rounded file:border-0 file:text-[11px] file:font-semibold file:bg-blue-600 file:text-white cursor-pointer" />
+
+                                    <!-- ফাইল ইনপুট + চেকবক্স: মোবাইলে ফুল-উইডথ, নিচে -->
+                                    <div class="w-full sm:flex-grow sm:pt-2 space-y-3">
+                                        <input type="file" id="cv-photo-input" accept="image/*" onchange="handlePhotoUpload(event)"
+                                               class="w-full text-[11px] text-slate-400 file:mr-2 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-blue-600 hover:file:bg-blue-500 file:text-white cursor-pointer" />
+
                                         <div class="flex items-center gap-2">
-                                            <input type="checkbox" id="cv-show-photo" checked onchange="renderCV()" class="w-3.5 h-3.5 text-blue-600 rounded border-slate-700 bg-slate-800">
+                                            <input type="checkbox" id="cv-show-photo" checked onchange="renderCV()" class="w-4 h-4 text-blue-600 rounded border-slate-700 bg-slate-800">
                                             <label for="cv-show-photo" class="text-[11px] font-medium text-slate-300">Show Photo on CV</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-2">
+                            <!-- ✅ Stacked on mobile -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Full Name</label>
                                     <input type="text" id="cv-name" value="Tanvir Ahmed" oninput="renderCV()" class="input-field">
@@ -467,7 +506,7 @@
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Email Address</label>
                                     <input type="email" id="cv-email" value="tanvir.ahmed@example.com" oninput="renderCV()" class="input-field">
@@ -478,7 +517,7 @@
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
                                 <div>
                                     <label class="text-[10px] font-bold text-slate-300">Location (City, Country)</label>
                                     <input type="text" id="cv-location" value="Dhaka, Bangladesh" oninput="renderCV()" class="input-field">
@@ -496,13 +535,14 @@
                         </div>
                     </details>
 
+                    <!-- SUMMARY -->
                     <details class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
                             <span class="flex items-center gap-2 text-blue-400"><i data-lucide="file-text" class="w-4 h-4"></i> Executive Summary</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
-                        <div class="p-4 bg-slate-950 space-y-2">
-                            <div class="flex justify-between items-center">
+                        <div class="p-3.5 md:p-4 bg-slate-950 space-y-2">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
                                 <label class="text-[10px] font-bold text-slate-300">Summary Text</label>
                                 <div class="flex gap-1.5">
                                     <button type="button" onclick="insertBoldToSummary()" class="text-[10px] bg-slate-900 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2.5 py-1 rounded flex items-center gap-1 font-bold transition" title="Make selected text bold">
@@ -517,51 +557,55 @@
                         </div>
                     </details>
 
+                    <!-- EXPERIENCE -->
                     <details open class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
                             <span class="flex items-center gap-2 text-blue-400"><i data-lucide="briefcase" class="w-4 h-4"></i> Work Experience & Projects</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
-                        <div class="p-4 space-y-3 bg-slate-950">
+                        <div class="p-3.5 md:p-4 space-y-3 bg-slate-950">
                             <div id="experience-container" class="space-y-3"></div>
-                            <button type="button" onclick="addExperience()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                            <button type="button" onclick="addExperience()" class="w-full py-2.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Work Experience / Project
                             </button>
                         </div>
                     </details>
 
+                    <!-- EDUCATION -->
                     <details class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
                             <span class="flex items-center gap-2 text-blue-400"><i data-lucide="graduation-cap" class="w-4 h-4"></i> Academic Qualifications</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
-                        <div class="p-4 space-y-3 bg-slate-950">
+                        <div class="p-3.5 md:p-4 space-y-3 bg-slate-950">
                             <div id="education-container" class="space-y-3"></div>
-                            <button type="button" onclick="addEducation()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                            <button type="button" onclick="addEducation()" class="w-full py-2.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Academic Qualification
                             </button>
                         </div>
                     </details>
 
+                    <!-- TRAININGS -->
                     <details class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
                             <span class="flex items-center gap-2 text-blue-400"><i data-lucide="award" class="w-4 h-4"></i> Trainings & Certifications</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
-                        <div class="p-4 space-y-3 bg-slate-950">
+                        <div class="p-3.5 md:p-4 space-y-3 bg-slate-950">
                             <div id="training-container" class="space-y-3"></div>
-                            <button type="button" onclick="addTraining()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                            <button type="button" onclick="addTraining()" class="w-full py-2.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Training / Certification
                             </button>
                         </div>
                     </details>
 
+                    <!-- SKILLS -->
                     <details class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
                             <span class="flex items-center gap-2 text-blue-400"><i data-lucide="check-square" class="w-4 h-4"></i> Skills & Languages</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
-                        <div class="p-4 space-y-3 bg-slate-950 text-slate-200">
+                        <div class="p-3.5 md:p-4 space-y-3 bg-slate-950 text-slate-200">
                             <div>
                                 <label class="text-[10px] font-bold text-slate-300">Core Competencies / Technical Stack (Comma Separated)</label>
                                 <textarea id="cv-skills" rows="3" oninput="renderCV()" class="input-field">Strategic Planning, Project Management, Team Leadership, Business Development, Operations Management, Financial Budgeting, Client Relations, Risk Assessment, Data Analysis, Agile Methodologies</textarea>
@@ -573,14 +617,15 @@
                         </div>
                     </details>
 
+                    <!-- REFERENCES -->
                     <details class="border border-slate-800 rounded-xl bg-slate-900/50 overflow-hidden">
                         <summary class="p-3.5 text-xs font-bold text-slate-200 cursor-pointer flex justify-between items-center bg-slate-900 border-b border-slate-800">
                             <span class="flex items-center gap-2 text-blue-400"><i data-lucide="users" class="w-4 h-4"></i> Professional References</span>
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                         </summary>
-                        <div class="p-4 space-y-3 bg-slate-950">
+                        <div class="p-3.5 md:p-4 space-y-3 bg-slate-950">
                             <div id="reference-container" class="space-y-3"></div>
-                            <button type="button" onclick="addReference()" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                            <button type="button" onclick="addReference()" class="w-full py-2.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/40 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition">
                                 <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Reference
                             </button>
                         </div>
@@ -589,13 +634,13 @@
 
             </div>
 
-            <!-- Live Preview Panel -->
-            <div id="preview-panel" class="mobile-panel preview-panel lg:col-span-7 bg-slate-950 p-3 md:p-6 rounded-2xl border border-slate-800 overflow-hidden flex flex-col items-center justify-start min-h-[88vh]">
-                <div class="w-full flex items-center justify-between mb-4 px-2">
-                    <div class="text-xs text-slate-300 font-semibold flex items-center gap-2">
+            <!-- ===================== PREVIEW PANEL ===================== -->
+            <div id="preview-panel" class="mobile-panel preview-panel lg:col-span-7 bg-slate-950 p-3 md:p-6 rounded-2xl border border-slate-800 overflow-hidden flex flex-col items-center justify-start lg:min-h-[88vh]">
+                <div class="w-full flex items-center justify-between mb-4 px-1 md:px-2">
+                    <div class="text-[11px] md:text-xs text-slate-300 font-semibold flex items-center gap-2">
                         <i data-lucide="eye" class="w-4 h-4 text-blue-400"></i> Live International Standard Canvas
                     </div>
-                    <span class="text-[11px] text-slate-500">210mm x 297mm (A4)</span>
+                    <span class="text-[10px] md:text-[11px] text-slate-500">210mm x 297mm (A4)</span>
                 </div>
 
                 <div class="a4-wrapper">
@@ -608,7 +653,7 @@
     </main>
 
     <footer class="bg-slate-950 border-t border-slate-800 py-4 mt-auto no-print">
-        <div class="max-w-[1700px] mx-auto px-4 text-center text-xs text-slate-400">
+        <div class="max-w-[1700px] mx-auto px-4 text-center text-[11px] md:text-xs text-slate-400">
             &copy; 2026 Enterprise Professional Resume Suite. Developed by <a href="https://altrasolve.com" target="_blank" class="font-bold text-blue-400 hover:underline">Altra Solve</a>.
         </div>
     </footer>
@@ -701,26 +746,30 @@
         ];
 
         function saveToLocalStorage() {
-            const cvData = {
-                theme: document.getElementById('cv-theme-select').value,
-                showPhoto: document.getElementById('cv-show-photo').checked,
-                photo: userPhotoData,
-                name: document.getElementById('cv-name').value,
-                title: document.getElementById('cv-title').value,
-                email: document.getElementById('cv-email').value,
-                phone: document.getElementById('cv-phone').value,
-                location: document.getElementById('cv-location').value,
-                linkedin: document.getElementById('cv-linkedin').value,
-                website: document.getElementById('cv-website').value,
-                summary: document.getElementById('cv-summary').value,
-                skills: document.getElementById('cv-skills').value,
-                languages: document.getElementById('cv-languages').value,
-                experiences: experiences,
-                educations: educations,
-                trainings: trainings,
-                references: references
-            };
-            localStorage.setItem('altra_solve_cv_data', JSON.stringify(cvData));
+            try {
+                const cvData = {
+                    theme: document.getElementById('cv-theme-select').value,
+                    showPhoto: document.getElementById('cv-show-photo').checked,
+                    photo: userPhotoData,
+                    name: document.getElementById('cv-name').value,
+                    title: document.getElementById('cv-title').value,
+                    email: document.getElementById('cv-email').value,
+                    phone: document.getElementById('cv-phone').value,
+                    location: document.getElementById('cv-location').value,
+                    linkedin: document.getElementById('cv-linkedin').value,
+                    website: document.getElementById('cv-website').value,
+                    summary: document.getElementById('cv-summary').value,
+                    skills: document.getElementById('cv-skills').value,
+                    languages: document.getElementById('cv-languages').value,
+                    experiences: experiences,
+                    educations: educations,
+                    trainings: trainings,
+                    references: references
+                };
+                localStorage.setItem('altra_solve_cv_data', JSON.stringify(cvData));
+            } catch (err) {
+                console.warn('LocalStorage save failed (quota likely exceeded):', err);
+            }
         }
 
         function formatDescription(text) {
@@ -740,9 +789,9 @@
                     const bulletChar = match[1].match(/\d/) ? match[1] : '•';
                     const content = match[2];
                     return `<li class="flex items-start gap-1.5 my-0.5">
-                                <span class="inline-block font-bold select-none opacity-80 flex-shrink-0">${bulletChar}</span>
-                                <span class="flex-1 leading-snug">${content}</span>
-                              </li>`;
+                                    <span class="inline-block font-bold select-none opacity-80 flex-shrink-0">${bulletChar}</span>
+                                    <span class="flex-1 leading-snug">${content}</span>
+                                  </li>`;
                 } else {
                     return `<p class="my-0.5 leading-snug">${processedText}</p>`;
                 }
@@ -811,47 +860,70 @@
 
         function handlePhotoUpload(event) {
             const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    userPhotoData = e.target.result;
-                    document.getElementById('photo-preview-box').innerHTML = `<img src="${userPhotoData}" class="w-full h-full object-cover">`;
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    const MAX = 400;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height && width > MAX) {
+                        height = Math.round(height * MAX / width);
+                        width = MAX;
+                    } else if (height > MAX) {
+                        width = Math.round(width * MAX / height);
+                        height = MAX;
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    userPhotoData = canvas.toDataURL('image/jpeg', 0.85);
+                    document.getElementById('photo-preview-box').innerHTML =
+                        `<img src="${userPhotoData}" class="w-full h-full object-cover">`;
                     renderCV();
                 };
-                reader.readAsDataURL(file);
-            }
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
         function renderExperienceForm() {
             const container = document.getElementById('experience-container');
             container.innerHTML = experiences.map((exp, index) => `
-                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2 relative">
-                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                    <span class="text-[11px] font-bold text-blue-400">Project / Experience #${index + 1}</span>
-                    <button type="button" onclick="removeExperience(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                    </button>
-                  </div>
-                  <div class="grid grid-cols-2 gap-2">
-                    <input type="text" value="${exp.role || ''}" oninput="updateExperience(${index}, 'role', this.value)" placeholder="Project Name or Role" class="input-field">
-                    <input type="text" value="${exp.company || ''}" oninput="updateExperience(${index}, 'company', this.value)" placeholder="Organization / Context" class="input-field">
-                  </div>
-                  <input type="text" value="${exp.date || ''}" oninput="updateExperience(${index}, 'date', this.value)" placeholder="Duration (e.g., 2026)" class="input-field">
+                    <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2.5 relative">
+                      <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                        <span class="text-[11px] font-bold text-blue-400">Project / Experience #${index + 1}</span>
+                        <button type="button" onclick="removeExperience(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                        </button>
+                      </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
+                        <input type="text" value="${exp.role || ''}" oninput="updateExperience(${index}, 'role', this.value)" placeholder="Project Name or Role" class="input-field">
+                        <input type="text" value="${exp.company || ''}" oninput="updateExperience(${index}, 'company', this.value)" placeholder="Organization / Context" class="input-field">
+                      </div>
+                      <input type="text" value="${exp.date || ''}" oninput="updateExperience(${index}, 'date', this.value)" placeholder="Duration (e.g., 2026)" class="input-field">
 
-                  <div class="flex justify-between items-center pt-1">
-                    <label class="text-[10px] font-bold text-slate-300">Project Work / Description</label>
-                    <div class="flex gap-1.5">
-                        <button type="button" onclick="insertBoldToExp(${index})" class="text-[10px] bg-slate-950 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2 py-0.5 rounded font-bold transition" title="Make selected text bold">
-                            <b>B</b>
-                        </button>
-                        <button type="button" onclick="insertBulletToExp(${index})" class="text-[10px] bg-slate-950 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2 py-0.5 rounded flex items-center gap-1 font-semibold transition">
-                            <i data-lucide="list" class="w-3 h-3"></i> + Bullet
-                        </button>
+                      <div class="flex flex-wrap justify-between items-center gap-2 pt-1">
+                        <label class="text-[10px] font-bold text-slate-300">Project Work / Description</label>
+                        <div class="flex gap-1.5">
+                            <button type="button" onclick="insertBoldToExp(${index})" class="text-[10px] bg-slate-950 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2 py-0.5 rounded font-bold transition" title="Make selected text bold">
+                                <b>B</b>
+                            </button>
+                            <button type="button" onclick="insertBulletToExp(${index})" class="text-[10px] bg-slate-950 hover:bg-slate-800 text-blue-400 border border-slate-700 px-2 py-0.5 rounded flex items-center gap-1 font-semibold transition">
+                                <i data-lucide="list" class="w-3 h-3"></i> + Bullet
+                            </button>
+                        </div>
+                      </div>
+                      <textarea id="exp-desc-${index}" rows="4" oninput="updateExperience(${index}, 'desc', this.value)" placeholder="Describe project features, tech stack, and achievements..." class="input-field">${exp.desc || ''}</textarea>
                     </div>
-                  </div>
-                  <textarea id="exp-desc-${index}" rows="3" oninput="updateExperience(${index}, 'desc', this.value)" placeholder="Describe project features, tech stack, and achievements..." class="input-field">${exp.desc || ''}</textarea>
-                </div>
-            `).join('');
+                `).join('');
             lucide.createIcons();
         }
 
@@ -875,21 +947,21 @@
         function renderEducationForm() {
             const container = document.getElementById('education-container');
             container.innerHTML = educations.map((edu, index) => `
-                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
-                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                    <span class="text-[11px] font-bold text-blue-400">Education #${index + 1}</span>
-                    <button type="button" onclick="removeEducation(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                    </button>
-                  </div>
-                  <input type="text" value="${edu.degree || ''}" oninput="updateEducation(${index}, 'degree', this.value)" placeholder="Degree Name" class="input-field">
-                  <input type="text" value="${edu.inst || ''}" oninput="updateEducation(${index}, 'inst', this.value)" placeholder="Institution" class="input-field">
-                  <div class="grid grid-cols-2 gap-2">
-                    <input type="text" value="${edu.year || ''}" oninput="updateEducation(${index}, 'year', this.value)" placeholder="Year / Duration" class="input-field">
-                    <input type="text" value="${edu.cgpa || ''}" oninput="updateEducation(${index}, 'cgpa', this.value)" placeholder="CGPA / Result" class="input-field">
-                  </div>
-                </div>
-            `).join('');
+                    <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2.5">
+                      <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                        <span class="text-[11px] font-bold text-blue-400">Education #${index + 1}</span>
+                        <button type="button" onclick="removeEducation(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                        </button>
+                      </div>
+                      <input type="text" value="${edu.degree || ''}" oninput="updateEducation(${index}, 'degree', this.value)" placeholder="Degree Name" class="input-field">
+                      <input type="text" value="${edu.inst || ''}" oninput="updateEducation(${index}, 'inst', this.value)" placeholder="Institution" class="input-field">
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
+                        <input type="text" value="${edu.year || ''}" oninput="updateEducation(${index}, 'year', this.value)" placeholder="Year / Duration" class="input-field">
+                        <input type="text" value="${edu.cgpa || ''}" oninput="updateEducation(${index}, 'cgpa', this.value)" placeholder="CGPA / Result" class="input-field">
+                      </div>
+                    </div>
+                `).join('');
             lucide.createIcons();
         }
 
@@ -913,21 +985,21 @@
         function renderTrainingForm() {
             const container = document.getElementById('training-container');
             container.innerHTML = trainings.map((t, index) => `
-                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
-                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                    <span class="text-[11px] font-bold text-blue-400">Training #${index + 1}</span>
-                    <button type="button" onclick="removeTraining(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                    </button>
-                  </div>
-                  <input type="text" value="${t.title || ''}" oninput="updateTraining(${index}, 'title', this.value)" placeholder="Course / Workshop Title" class="input-field">
-                  <div class="grid grid-cols-2 gap-2">
-                    <input type="text" value="${t.inst || ''}" oninput="updateTraining(${index}, 'inst', this.value)" placeholder="Institution / Vendor" class="input-field">
-                    <input type="text" value="${t.year || ''}" oninput="updateTraining(${index}, 'year', this.value)" placeholder="Year" class="input-field">
-                  </div>
-                  <input type="text" value="${t.details || ''}" oninput="updateTraining(${index}, 'details', this.value)" placeholder="Brief Scope / Modules covered" class="input-field">
-                </div>
-            `).join('');
+                    <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2.5">
+                      <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                        <span class="text-[11px] font-bold text-blue-400">Training #${index + 1}</span>
+                        <button type="button" onclick="removeTraining(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                        </button>
+                      </div>
+                      <input type="text" value="${t.title || ''}" oninput="updateTraining(${index}, 'title', this.value)" placeholder="Course / Workshop Title" class="input-field">
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
+                        <input type="text" value="${t.inst || ''}" oninput="updateTraining(${index}, 'inst', this.value)" placeholder="Institution / Vendor" class="input-field">
+                        <input type="text" value="${t.year || ''}" oninput="updateTraining(${index}, 'year', this.value)" placeholder="Year" class="input-field">
+                      </div>
+                      <input type="text" value="${t.details || ''}" oninput="updateTraining(${index}, 'details', this.value)" placeholder="Brief Scope / Modules covered" class="input-field">
+                    </div>
+                `).join('');
             lucide.createIcons();
         }
 
@@ -951,24 +1023,24 @@
         function renderReferenceForm() {
             const container = document.getElementById('reference-container');
             container.innerHTML = references.map((ref, index) => `
-                <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
-                  <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-                    <span class="text-[11px] font-bold text-blue-400">Reference #${index + 1}</span>
-                    <button type="button" onclick="removeReference(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
-                      <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
-                    </button>
-                  </div>
-                  <div class="grid grid-cols-2 gap-2">
-                    <input type="text" value="${ref.name || ''}" oninput="updateReference(${index}, 'name', this.value)" placeholder="Referee Name" class="input-field">
-                    <input type="text" value="${ref.title || ''}" oninput="updateReference(${index}, 'title', this.value)" placeholder="Designation" class="input-field">
-                  </div>
-                  <div class="grid grid-cols-3 gap-2">
-                    <input type="text" value="${ref.company || ''}" oninput="updateReference(${index}, 'company', this.value)" placeholder="Organization" class="input-field">
-                    <input type="email" value="${ref.email || ''}" oninput="updateReference(${index}, 'email', this.value)" placeholder="Email" class="input-field">
-                    <input type="text" value="${ref.phone || ''}" oninput="updateReference(${index}, 'phone', this.value)" placeholder="Phone" class="input-field">
-                  </div>
-                </div>
-            `).join('');
+                    <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2.5">
+                      <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                        <span class="text-[11px] font-bold text-blue-400">Reference #${index + 1}</span>
+                        <button type="button" onclick="removeReference(${index})" class="text-rose-400 hover:text-rose-300 text-[10px] font-bold flex items-center gap-0.5">
+                          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+                        </button>
+                      </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-2">
+                        <input type="text" value="${ref.name || ''}" oninput="updateReference(${index}, 'name', this.value)" placeholder="Referee Name" class="input-field">
+                        <input type="text" value="${ref.title || ''}" oninput="updateReference(${index}, 'title', this.value)" placeholder="Designation" class="input-field">
+                      </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-2">
+                        <input type="text" value="${ref.company || ''}" oninput="updateReference(${index}, 'company', this.value)" placeholder="Organization" class="input-field">
+                        <input type="email" value="${ref.email || ''}" oninput="updateReference(${index}, 'email', this.value)" placeholder="Email" class="input-field">
+                        <input type="text" value="${ref.phone || ''}" oninput="updateReference(${index}, 'phone', this.value)" placeholder="Phone" class="input-field">
+                      </div>
+                    </div>
+                `).join('');
             lucide.createIcons();
         }
 
@@ -1026,239 +1098,264 @@
             const validReferences = references.filter(r => (r.name && r.name.trim()) || (r.title && r.title.trim()) || (r.company && r.company.trim()));
 
             const expBlock = validExperiences.length ? `
-                <div class="mb-3 cv-section-block">
-                  <h2 class="section-title">Professional Experience & Projects</h2>
-                  <div class="space-y-2.5">
-                    ${validExperiences.map(exp => `
-                      <div class="cv-item-block">
-                        <div class="flex justify-between items-baseline">
-                          <h3 class="font-bold text-slate-900 text-xs">${exp.role.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>')} ${exp.company ? `<span class="font-semibold text-blue-700">| ${exp.company}</span>` : ''}</h3>
-                          <span class="text-[10px] font-bold text-slate-500">${exp.date || ''}</span>
-                        </div>
-                        <div class="text-[11px] text-slate-700 mt-0.5">${formatDescription(exp.desc)}</div>
+                    <div class="mb-3 cv-section-block">
+                      <h2 class="section-title">Professional Experience & Projects</h2>
+                      <div class="space-y-2.5">
+                        ${validExperiences.map(exp => `
+                          <div class="cv-item-block">
+                            <div class="flex justify-between items-baseline">
+                              <h3 class="font-bold text-slate-900 text-xs">${exp.role.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>')} ${exp.company ? `<span class="font-semibold text-blue-700">| ${exp.company}</span>` : ''}</h3>
+                              <span class="text-[10px] font-bold text-slate-500">${exp.date || ''}</span>
+                            </div>
+                            <div class="text-[11px] text-slate-700 mt-0.5">${formatDescription(exp.desc)}</div>
+                          </div>
+                        `).join('')}
                       </div>
-                    `).join('')}
-                  </div>
-                </div>` : '';
+                    </div>` : '';
 
             const eduBlock = validEducations.length ? `
-                <div class="mb-3 cv-section-block">
-                  <h2 class="section-title">Academic Qualifications</h2>
-                  <div class="space-y-2">
-                    ${validEducations.map(edu => `
-                      <div class="flex justify-between items-baseline cv-item-block">
-                        <div>
-                          <h3 class="font-bold text-slate-900 text-xs">${edu.degree || ''} ${edu.cgpa ? `<span class="font-normal text-slate-650">(CGPA: ${edu.cgpa})</span>` : ''}</h3>
-                          <p class="text-[11px] text-slate-600">${edu.inst || ''}</p>
-                        </div>
-                        <span class="text-[10px] font-semibold text-slate-500">${edu.year || ''}</span>
+                    <div class="mb-3 cv-section-block">
+                      <h2 class="section-title">Academic Qualifications</h2>
+                      <div class="space-y-2">
+                        ${validEducations.map(edu => `
+                          <div class="flex justify-between items-baseline cv-item-block">
+                            <div>
+                              <h3 class="font-bold text-slate-900 text-xs">${edu.degree || ''} ${edu.cgpa ? `<span class="font-normal text-slate-600">(CGPA: ${edu.cgpa})</span>` : ''}</h3>
+                              <p class="text-[11px] text-slate-600">${edu.inst || ''}</p>
+                            </div>
+                            <span class="text-[10px] font-semibold text-slate-500">${edu.year || ''}</span>
+                          </div>
+                        `).join('')}
                       </div>
-                    `).join('')}
-                  </div>
-                </div>` : '';
+                    </div>` : '';
 
             const trainBlock = validTrainings.length ? `
-                <div class="mb-3 cv-section-block">
-                  <h2 class="section-title">Trainings & Certifications</h2>
-                  <div class="space-y-2">
-                    ${validTrainings.map(t => `
-                      <div class="flex justify-between items-baseline cv-item-block">
-                        <div>
-                          <h3 class="font-bold text-slate-900 text-xs">${t.title || ''} ${t.inst ? `<span class="font-normal text-slate-650">— ${t.inst}</span>` : ''}</h3>
-                          <p class="text-[10px] text-slate-600">${t.details || ''}</p>
-                        </div>
-                        <span class="text-[10px] font-semibold text-slate-500">${t.year || ''}</span>
+                    <div class="mb-3 cv-section-block">
+                      <h2 class="section-title">Trainings & Certifications</h2>
+                      <div class="space-y-2">
+                        ${validTrainings.map(t => `
+                          <div class="flex justify-between items-baseline cv-item-block">
+                            <div>
+                              <h3 class="font-bold text-slate-900 text-xs">${t.title || ''} ${t.inst ? `<span class="font-normal text-slate-600">— ${t.inst}</span>` : ''}</h3>
+                              <p class="text-[10px] text-slate-600">${t.details || ''}</p>
+                            </div>
+                            <span class="text-[10px] font-semibold text-slate-500">${t.year || ''}</span>
+                          </div>
+                        `).join('')}
                       </div>
-                    `).join('')}
-                  </div>
-                </div>` : '';
+                    </div>` : '';
 
             const refBlock = validReferences.length ? `
-                <div class="cv-section-block">
-                  <h2 class="section-title">Professional References</h2>
-                  <div class="grid grid-cols-2 gap-4 text-xs">
-                    ${validReferences.map(r => `
-                      <div class="cv-item-block">
-                        <p class="font-bold text-slate-900">${r.name || ''}</p>
-                        <p class="text-[11px] text-slate-700">${r.title || ''}${r.title && r.company ? ', ' : ''}${r.company || ''}</p>
-                        <p class="text-[10px] text-slate-500 mt-0.5">${[r.email, r.phone].filter(Boolean).join(' | ')}</p>
+                    <div class="cv-section-block">
+                      <h2 class="section-title">Professional References</h2>
+                      <div class="grid grid-cols-2 gap-4 text-xs">
+                        ${validReferences.map(r => `
+                          <div class="cv-item-block">
+                            <p class="font-bold text-slate-900">${r.name || ''}</p>
+                            <p class="text-[11px] text-slate-700">${r.title || ''}${r.title && r.company ? ', ' : ''}${r.company || ''}</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5">${[r.email, r.phone].filter(Boolean).join(' | ')}</p>
+                          </div>
+                        `).join('')}
                       </div>
-                    `).join('')}
-                  </div>
-                </div>` : '';
+                    </div>` : '';
 
             const skillsBlock = data.skills.length ? `
-                <div class="mb-3 cv-section-block">
-                  <h2 class="section-title">Core Competencies</h2>
-                  <div class="flex flex-wrap gap-1.5 mt-1">
-                    ${data.skills.map(s => `<span class="bg-slate-100 border border-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
-                  </div>
-                </div>` : '';
+                    <div class="mb-3 cv-section-block">
+                      <h2 class="section-title">Core Competencies</h2>
+                      <div class="flex flex-wrap gap-1.5 mt-1">
+                        ${data.skills.map(s => `<span class="bg-slate-100 border border-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded font-semibold">${s}</span>`).join('')}
+                      </div>
+                    </div>` : '';
 
             if (theme === 'theme-3') {
                 container.innerHTML = `
-                  <div class="a4-page cv-theme-3">
-                    <div class="sidebar">
-                      ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-28 h-32 object-cover rounded mb-4 mx-auto border-2 border-slate-600">` : ''}
-                      ${data.name ? `<h1 class="text-base font-bold text-white mb-1">${data.name}</h1>` : ''}
-                      ${data.title ? `<p class="text-[11px] text-sky-400 mb-4">${data.title}</p>` : ''}
+                      <div class="a4-page cv-theme-3">
+                        <div class="sidebar">
+                          ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-28 h-32 object-cover rounded mb-4 mx-auto border-2 border-slate-600">` : ''}
+                          ${data.name ? `<h1 class="text-base font-bold text-white mb-1">${data.name}</h1>` : ''}
+                          ${data.title ? `<p class="text-[11px] text-sky-400 mb-4">${data.title}</p>` : ''}
 
-                      <div class="space-y-2.5 text-[10px] text-slate-300">
-                        ${data.email ? `<p class="break-words">📧 ${data.email}</p>` : ''}
-                        ${data.phone ? `<p>📞 ${data.phone}</p>` : ''}
-                        ${data.location ? `<p>📍 ${data.location}</p>` : ''}
-                        ${data.linkedin ? `<p class="break-words">🔗 ${data.linkedin}</p>` : ''}
-                        ${data.website ? `<p class="break-words">🌐 ${data.website}</p>` : ''}
-                      </div>
+                          <div class="space-y-2.5 text-[10px] text-slate-300">
+                            ${data.email ? `<p class="break-words">📧 ${data.email}</p>` : ''}
+                            ${data.phone ? `<p>📞 ${data.phone}</p>` : ''}
+                            ${data.location ? `<p>📍 ${data.location}</p>` : ''}
+                            ${data.linkedin ? `<p class="break-words">🔗 ${data.linkedin}</p>` : ''}
+                            ${data.website ? `<p class="break-words">🌐 ${data.website}</p>` : ''}
+                          </div>
 
-                      ${data.skills.length ? `
-                      <div class="mt-5 cv-section-block">
-                        <h2 class="section-title">Core Skills</h2>
-                        <div class="flex flex-wrap gap-1 mt-1.5">
-                          ${data.skills.map(s => `<span class="bg-slate-800 text-sky-300 text-[10px] px-2 py-0.5 rounded border border-slate-700">${s}</span>`).join('')}
+                          ${data.skills.length ? `
+                          <div class="mt-5 cv-section-block">
+                            <h2 class="section-title">Core Skills</h2>
+                            <div class="flex flex-wrap gap-1 mt-1.5">
+                              ${data.skills.map(s => `<span class="bg-slate-800 text-sky-300 text-[10px] px-2 py-0.5 rounded border border-slate-700">${s}</span>`).join('')}
+                            </div>
+                          </div>` : ''}
+
+                          ${data.languages ? `
+                          <div class="mt-5 cv-section-block">
+                            <h2 class="section-title">Languages</h2>
+                            <p class="text-[10px] text-slate-300 mt-1">${data.languages}</p>
+                          </div>` : ''}
                         </div>
-                      </div>` : ''}
 
-                      ${data.languages ? `
-                      <div class="mt-5 cv-section-block">
-                        <h2 class="section-title">Languages</h2>
-                        <p class="text-[10px] text-slate-300 mt-1">${data.languages}</p>
-                      </div>` : ''}
-                    </div>
-
-                    <div class="main-content">
-                      ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Executive Summary</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
-                      ${expBlock}
-                      ${eduBlock}
-                      ${trainBlock}
-                      ${refBlock}
-                    </div>
-                  </div>`;
+                        <div class="main-content">
+                          ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Executive Summary</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                          ${expBlock}
+                          ${eduBlock}
+                          ${trainBlock}
+                          ${refBlock}
+                        </div>
+                      </div>`;
             } else if (theme === 'theme-4') {
                 container.innerHTML = `
-                  <div class="a4-page cv-theme-4">
-                    <div class="text-center border-b pb-3 mb-3 cv-section-block">
-                      ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-20 h-24 object-cover rounded-full mx-auto mb-2 border border-slate-400">` : ''}
-                      ${data.name ? `<h1 class="text-2xl font-bold">${data.name}</h1>` : ''}
-                      ${data.title ? `<p class="text-xs font-semibold italic text-slate-700 mt-0.5">${data.title}</p>` : ''}
-                      ${contactBlockHtml ? `<div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
-                    </div>
-                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Professional Summary</h2><div class="text-xs text-slate-800 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
-                    ${expBlock}
-                    ${eduBlock}
-                    ${skillsBlock}
-                    ${trainBlock}
-                    ${refBlock}
-                  </div>`;
+                      <div class="a4-page cv-theme-4">
+                        <div class="text-center border-b pb-3 mb-3 cv-section-block">
+                          ${userPhotoData && showPhoto ? `<img src="${userPhotoData}" class="w-20 h-24 object-cover rounded-full mx-auto mb-2 border border-slate-400">` : ''}
+                          ${data.name ? `<h1 class="text-2xl font-bold">${data.name}</h1>` : ''}
+                          ${data.title ? `<p class="text-xs font-semibold italic text-slate-700 mt-0.5">${data.title}</p>` : ''}
+                          ${contactBlockHtml ? `<div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                        </div>
+                        ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Professional Summary</h2><div class="text-xs text-slate-800 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                        ${expBlock}
+                        ${eduBlock}
+                        ${skillsBlock}
+                        ${trainBlock}
+                        ${refBlock}
+                      </div>`;
             } else if (theme === 'theme-5') {
                 container.innerHTML = `
-                  <div class="a4-page cv-theme-5">
-                    <div class="flex justify-between items-center border-b-2 border-teal-600 pb-3 mb-3 cv-section-block">
-                      <div>
-                        ${data.name ? `<h1 class="text-2xl font-black text-teal-900">${data.name}</h1>` : ''}
-                        ${data.title ? `<p class="font-bold text-xs text-teal-700 mt-0.5">${data.title}</p>` : ''}
-                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
-                      </div>
-                      ${photoHtml}
-                    </div>
-                    <div class="grid grid-cols-12 gap-4">
-                      <div class="col-span-8">
-                        ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Overview</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
-                        ${expBlock}
-                      </div>
-                      <div class="col-span-4 space-y-3">
-                        ${skillsBlock}
-                        ${eduBlock}
-                        ${trainBlock}
-                      </div>
-                    </div>
-                    ${refBlock}
-                  </div>`;
+                      <div class="a4-page cv-theme-5">
+                        <div class="flex justify-between items-center border-b-2 border-teal-600 pb-3 mb-3 cv-section-block">
+                          <div>
+                            ${data.name ? `<h1 class="text-2xl font-black text-teal-900">${data.name}</h1>` : ''}
+                            ${data.title ? `<p class="font-bold text-xs text-teal-700 mt-0.5">${data.title}</p>` : ''}
+                            ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                          </div>
+                          ${photoHtml}
+                        </div>
+                        <div class="grid grid-cols-12 gap-4">
+                          <div class="col-span-8">
+                            ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Overview</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                            ${expBlock}
+                          </div>
+                          <div class="col-span-4 space-y-3">
+                            ${skillsBlock}
+                            ${eduBlock}
+                            ${trainBlock}
+                          </div>
+                        </div>
+                        ${refBlock}
+                      </div>`;
             } else if (theme === 'theme-6') {
                 container.innerHTML = `
-                  <div class="a4-page cv-theme-6">
-                    <div class="header-card flex justify-between items-center">
-                      <div>
-                        ${data.name ? `<h1 class="text-xl font-extrabold text-slate-800">${data.name}</h1>` : ''}
-                        ${data.title ? `<p class="text-xs font-bold text-slate-600 mt-0.5">${data.title}</p>` : ''}
-                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-x-3 text-[10px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
-                      </div>
-                      ${photoHtml}
-                    </div>
-                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
-                    ${expBlock}
-                    ${eduBlock}
-                    ${skillsBlock}
-                    ${trainBlock}
-                    ${refBlock}
-                  </div>`;
+                      <div class="a4-page cv-theme-6">
+                        <div class="header-card flex justify-between items-center">
+                          <div>
+                            ${data.name ? `<h1 class="text-xl font-extrabold text-slate-800">${data.name}</h1>` : ''}
+                            ${data.title ? `<p class="text-xs font-bold text-slate-600 mt-0.5">${data.title}</p>` : ''}
+                            ${contactBlockHtml ? `<div class="flex flex-wrap gap-x-3 text-[10px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                          </div>
+                          ${photoHtml}
+                        </div>
+                        ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                        ${expBlock}
+                        ${eduBlock}
+                        ${skillsBlock}
+                        ${trainBlock}
+                        ${refBlock}
+                      </div>`;
             } else if (theme === 'theme-7') {
                 container.innerHTML = `
-                  <div class="a4-page cv-theme-7">
-                    <div class="banner flex justify-between items-center">
-                      <div>
-                        ${data.name ? `<h1 class="text-2xl font-bold">${data.name}</h1>` : ''}
-                        ${data.title ? `<p class="text-indigo-200 text-xs mt-1 font-medium">${data.title}</p>` : ''}
-                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[11px] text-indigo-100 mt-3">${contactBlockHtml}</div>` : ''}
-                      </div>
-                      ${photoHtml}
-                    </div>
-                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
-                    ${expBlock}
-                    ${eduBlock}
-                    ${skillsBlock}
-                    ${trainBlock}
-                    ${refBlock}
-                  </div>`;
+                      <div class="a4-page cv-theme-7">
+                        <div class="banner flex justify-between items-center">
+                          <div>
+                            ${data.name ? `<h1 class="text-2xl font-bold">${data.name}</h1>` : ''}
+                            ${data.title ? `<p class="text-indigo-200 text-xs mt-1 font-medium">${data.title}</p>` : ''}
+                            ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[11px] text-indigo-100 mt-3">${contactBlockHtml}</div>` : ''}
+                          </div>
+                          ${photoHtml}
+                        </div>
+                        ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Profile</h2><div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                        ${expBlock}
+                        ${eduBlock}
+                        ${skillsBlock}
+                        ${trainBlock}
+                        ${refBlock}
+                      </div>`;
             } else if (theme === 'theme-9') {
                 container.innerHTML = `
-                  <div class="a4-page cv-theme-9">
-                    <div class="border-b-2 border-black pb-3 mb-3 flex justify-between items-center cv-section-block">
-                      <div>
-                        ${data.name ? `<h1 class="text-2xl font-black text-black">${data.name}</h1>` : ''}
-                        ${data.title ? `<p class="text-xs font-semibold text-zinc-700 mt-0.5">${data.title}</p>` : ''}
-                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[10px] text-zinc-600 mt-1.5">${contactBlockHtml}</div>` : ''}
-                      </div>
-                      ${photoHtml}
-                    </div>
-                    ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Summary</h2><div class="text-xs text-zinc-800 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
-                    ${expBlock}
-                    ${eduBlock}
-                    ${skillsBlock}
-                    ${trainBlock}
-                    ${refBlock}
-                  </div>`;
+                      <div class="a4-page cv-theme-9">
+                        <div class="border-b-2 border-black pb-3 mb-3 flex justify-between items-center cv-section-block">
+                          <div>
+                            ${data.name ? `<h1 class="text-2xl font-black text-black">${data.name}</h1>` : ''}
+                            ${data.title ? `<p class="text-xs font-semibold text-zinc-700 mt-0.5">${data.title}</p>` : ''}
+                            ${contactBlockHtml ? `<div class="flex flex-wrap gap-3 text-[10px] text-zinc-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                          </div>
+                          ${photoHtml}
+                        </div>
+                        ${data.summary ? `<div class="mb-3 cv-section-block"><h2 class="section-title">Summary</h2><div class="text-xs text-zinc-800 mt-1">${formatDescription(data.summary)}</div></div>` : ''}
+                        ${expBlock}
+                        ${eduBlock}
+                        ${skillsBlock}
+                        ${trainBlock}
+                        ${refBlock}
+                      </div>`;
             } else {
                 const themeClass = `cv-${theme}`;
                 const hasHeader = data.name || data.title || contactBlockHtml || photoHtml;
                 container.innerHTML = `
-                  <div class="a4-page ${themeClass}">
-                    ${hasHeader ? `
-                    <div class="border-b pb-3 mb-3 flex justify-between items-center gap-4 cv-section-block">
-                      <div>
-                        ${data.name ? `<h1 class="text-2xl font-bold text-slate-900">${data.name}</h1>` : ''}
-                        ${data.title ? `<p class="font-semibold text-xs mt-0.5 text-slate-600">${data.title}</p>` : ''}
-                        ${contactBlockHtml ? `<div class="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
-                      </div>
-                      ${photoHtml}
-                    </div>` : ''}
+                      <div class="a4-page ${themeClass}">
+                        ${hasHeader ? `
+                        <div class="border-b pb-3 mb-3 flex justify-between items-center gap-4 cv-section-block">
+                          <div>
+                            ${data.name ? `<h1 class="text-2xl font-bold text-slate-900">${data.name}</h1>` : ''}
+                            ${data.title ? `<p class="font-semibold text-xs mt-0.5 text-slate-600">${data.title}</p>` : ''}
+                            ${contactBlockHtml ? `<div class="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-slate-600 mt-1.5">${contactBlockHtml}</div>` : ''}
+                          </div>
+                          ${photoHtml}
+                        </div>` : ''}
 
-                    ${data.summary ? `
-                    <div class="mb-3 cv-section-block">
-                      <h2 class="section-title">Executive Profile</h2>
-                      <div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div>
-                    </div>` : ''}
+                        ${data.summary ? `
+                        <div class="mb-3 cv-section-block">
+                          <h2 class="section-title">Executive Profile</h2>
+                          <div class="text-xs text-slate-700 mt-1">${formatDescription(data.summary)}</div>
+                        </div>` : ''}
 
-                    ${expBlock}
-                    ${eduBlock}
-                    ${skillsBlock}
-                    ${trainBlock}
-                    ${refBlock}
-                  </div>`;
+                        ${expBlock}
+                        ${eduBlock}
+                        ${skillsBlock}
+                        ${trainBlock}
+                        ${refBlock}
+                      </div>`;
             }
 
-            lucide.createIcons();
             saveToLocalStorage();
+            fitMobilePreview();
+        }
+
+        function fitMobilePreview() {
+            const page = document.querySelector('#cv-render-area .a4-page');
+            const wrap = document.querySelector('.a4-wrapper');
+            if (!page || !wrap) return;
+
+            if (window.innerWidth > 1023) {
+                page.style.transform = '';
+                page.style.transformOrigin = '';
+                page.style.marginBottom = '';
+                return;
+            }
+
+            page.style.transform = 'none';
+            page.style.marginBottom = '';
+
+            const naturalWidth = page.offsetWidth;
+            const naturalHeight = page.offsetHeight;
+            const available = wrap.clientWidth - 16;
+            const scale = Math.min(1, available / naturalWidth);
+
+            page.style.transform = `scale(${scale})`;
+            page.style.transformOrigin = 'top center';
+            page.style.marginBottom = `-${Math.round(naturalHeight * (1 - scale))}px`;
         }
 
         function showToast(message) {
@@ -1275,13 +1372,22 @@
         }
 
         function downloadPDF() {
+            const element = document.getElementById('cv-render-area').firstElementChild;
+            if (!element) return;
+
             showToast("Starting high-resolution PDF download...");
 
-            const element = document.getElementById('cv-render-area').firstElementChild;
+            const prevTransform = element.style.transform;
+            const prevMarginBottom = element.style.marginBottom;
+            const prevTransformOrigin = element.style.transformOrigin;
+            element.style.transform = 'none';
+            element.style.transformOrigin = '';
+            element.style.marginBottom = '0';
+
             const name = document.getElementById('cv-name').value || 'Professional_CV';
 
             const opt = {
-                margin: [5, 0, 5, 0],
+                margin: 0,
                 filename: `${name.trim().replace(/\s+/g, '_')}_CV.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0 },
@@ -1289,11 +1395,19 @@
                 pagebreak: { mode: ['css', 'legacy'], avoid: ['.cv-section-block', '.cv-item-block', '.section-title'] }
             };
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                showToast("CV Downloaded Successfully!");
-            }).catch(err => {
-                showToast("Download failed. Please try again.");
-            });
+            html2pdf().set(opt).from(element).save()
+                .then(() => {
+                    showToast("CV Downloaded Successfully!");
+                })
+                .catch(err => {
+                    console.error('PDF generation error:', err);
+                    showToast("Download failed. Please try again.");
+                })
+                .finally(() => {
+                    element.style.transform = prevTransform;
+                    element.style.transformOrigin = prevTransformOrigin;
+                    element.style.marginBottom = prevMarginBottom;
+                });
         }
 
         window.onload = () => {
@@ -1316,7 +1430,7 @@
                     if (data.phone !== undefined) document.getElementById('cv-phone').value = data.phone;
                     if (data.location !== undefined) document.getElementById('cv-location').value = data.location;
                     if (data.linkedin !== undefined) document.getElementById('cv-linkedin').value = data.linkedin;
-                    if (data.website !== undefined) document.getElementById('cv-website').value, document.getElementById('cv-website').value = data.website;
+                    if (data.website !== undefined) document.getElementById('cv-website').value = data.website;
                     if (data.summary !== undefined) document.getElementById('cv-summary').value = data.summary;
                     if (data.skills !== undefined) document.getElementById('cv-skills').value = data.skills;
                     if (data.languages !== undefined) document.getElementById('cv-languages').value = data.languages;
@@ -1335,7 +1449,18 @@
             renderTrainingForm();
             renderReferenceForm();
             renderCV();
+
+            setTimeout(fitMobilePreview, 100);
         };
+
+        window.addEventListener('resize', () => {
+            clearTimeout(window.__fitTimer);
+            window.__fitTimer = setTimeout(fitMobilePreview, 150);
+        });
+
+        window.addEventListener('orientationchange', () => {
+            setTimeout(fitMobilePreview, 250);
+        });
     </script>
 </body>
 </html>
